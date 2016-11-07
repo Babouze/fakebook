@@ -4,21 +4,21 @@
 	composée de méthodes statiques
 */
 
-class utilisateurTable {
+class utilisateurTable
+{
+	public static function getUserByLoginAndPass($login,$pass)
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
 
-public static function getUserByLoginAndPass($login,$pass){
-	$em = dbconnection::getInstance()->getEntityManager() ;
-
-	$userRepository = $em->getRepository('utilisateur');
-	$user = $userRepository->findOneBy(array('identifiant' => $login, 'pass' => sha1($pass)));	
-	
-	if ($user == false){
-		echo 'Erreur sql';
+		$userRepository = $em->getRepository('utilisateur');
+		$user = $userRepository->findOneBy(array('identifiant' => $login, 'pass' => sha1($pass)));	
+		
+		if ($user == false)
+		{
+			$context->message = "L'utilisateur n'existe pas";
+		}
+		return $user; 
 	}
-	return $user; 
-}
-
-
 }
 
 ?>
