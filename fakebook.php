@@ -1,7 +1,7 @@
 <?php
 
 //nom de l'application
-$nameApp = "monApplication";
+$nameApp = "fakebook";
 
 // Inclusion des classes et librairies
 require_once 'lib/core.php';
