@@ -19,6 +19,40 @@ class utilisateurTable
 		}
 		return $user; 
 	}
+
+	/*
+	 * author : DAUDEL Adrien
+	 */
+	public static function getUserById($idUser)
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$userRepository = $em->getRepository('utilisateur');
+		$user = $userRepository->findOneById($idUser);	
+		
+		if ($user == false)
+		{
+			$context->message = "L'utilisateur n'existe pas";
+		}
+		return $user; 
+	}
+
+	/*
+	 * author : DAUDEL Adrien
+	 */
+	public static function getUsers()
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$userRepository = $em->getRepository('utilisateur');
+		$users = $userRepository->findAll();	
+		
+		if ($users == false)
+		{
+			$context->message = "L'utilisateur n'existe pas";
+		}
+		return $users; 
+	}
 }
 
 ?>

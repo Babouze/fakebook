@@ -9,6 +9,7 @@ class mainController
 {
 	public static function login($request,$context)
 	{
+		chatTable::getChats();
 		if(empty($_POST['login']) && empty($_POST['password']))
 			return context::SUCCESS;
 		else if(empty($_POST['login']) || empty($_POST['password']))

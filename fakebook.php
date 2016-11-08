@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 ini_set('display_errors','on');
+=======
+ini_set('display_errors', 'on');
+>>>>>>> abca5ce7eaf8cfeb4a9276aedd63827cb3d1b471
 
 //nom de l'application
 $nameApp = "fakebook";
