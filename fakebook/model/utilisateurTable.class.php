@@ -13,7 +13,7 @@ class utilisateurTable
 		$userRepository = $em->getRepository('utilisateur');
 		$user = $userRepository->findOneBy(array('identifiant' => $login, 'pass' => sha1($pass)));	
 		
-		if ($user == false)
+		if(empty($user))
 		{
 			$context->message = "L'utilisateur n'existe pas";
 		}
@@ -30,7 +30,7 @@ class utilisateurTable
 		$userRepository = $em->getRepository('utilisateur');
 		$user = $userRepository->findOneById($idUser);	
 		
-		if ($user == false)
+		if(empty($user))
 		{
 			$context->message = "L'utilisateur n'existe pas";
 		}
@@ -47,7 +47,7 @@ class utilisateurTable
 		$userRepository = $em->getRepository('utilisateur');
 		$users = $userRepository->findAll();	
 		
-		if ($users == false)
+		if(empty($users))
 		{
 			$context->message = "L'utilisateur n'existe pas";
 		}
