@@ -13,25 +13,25 @@ class message {
 	public $id;
 
 	/**
-	* @ManyToOne(targetEntity="utilisateur")
+	* @OneToOne(targetEntity="utilisateur")
 	* @JoinColumn(name="emetteur", referencedColumnName="id")
 	*/
 	public $emetteur;
 		
 	/**
-	* @ManyToOne(targetEntity="utilisateur")
+	* @OneToOne(targetEntity="utilisateur")
 	* @JoinColumn(name="destinataire", referencedColumnName="id", nullable=true)
 	*/
 	public $destinataire;
 
 	/**
-	* @ManyToOne(targetEntity="utilisateur")
+	* @OneToOne(targetEntity="utilisateur")
 	* @JoinColumn(name="parent", referencedColumnName="id")
 	*/
 	public $parent;
 
 	/**
-	* @ManyToOne(targetEntity="post")
+	* @OneToOne(targetEntity="post")
 	* @JoinColumn(name="post", referencedColumnName="id")
 	*/
 	public $post;

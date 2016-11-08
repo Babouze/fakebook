@@ -36,7 +36,7 @@ class messageTable
 		}
 
 		
-		if($listOfMessage == false)
+		if(!empty($listOfMessage))
 		{
 			$context->message = "Aucun message pour cet utilisateur";
 		}
