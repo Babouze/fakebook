@@ -12,13 +12,28 @@ class messageTable
 
 		$messageRepository = $em->getRepository('message');
 
-		// $listOfMessage = $messageRepository->findAll();
-		$listOfMessage = $messageRepository->findBy(array('emetteur' => $idUser));
-		// $listOfMessageDestinataire = $messageRepository->findBy(array('destinataire' => $idUser));	
-		// $listOfMessage = $messageRepository->findByEmetteur($idUser);;
+		$listOfMessage = array();
 
-		/*array_push($listOfMessage,$listOfMessageEmetteur);	
-		array_push($listOfMessage,$listOfMessageDestinataire);*/
+		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi l'émetteur
+		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser);	
+		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser);;
+
+		foreach($listOfMessageDestinataire as $message) {
+			array_push($listOfMessage,$message);
+		}
+
+		foreach($listOfMessageEmetteur as $message) {
+			$isHere = false;
+			foreach($listOfMessage as $messageInArray) {
+				if($messageInArray->id == $message->id) {
+					$isHere = true;
+				}
+			}
+			if($isHere == false) {
+				array_push($listOfMessage,$message);	
+			}
+			
+		}
 
 		
 		if($listOfMessage == false)
