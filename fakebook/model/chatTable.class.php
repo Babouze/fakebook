@@ -13,14 +13,23 @@ class chatTable
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;
 
-		$userRepository = $em->getRepository('utilisateur');
-		$user = $userRepository->findOneById($idUser);	
+		// $qb = $em->createQueryBuilder();
+		// $qb->select('c')
+		// 	->from('chat', 'c')
+		// 	->innerjoin('post.id', 'c', Join::ON, 'c.post = post.id')
+		// 	->orderby('post.date', 'desc')
+		// 	->setMaxResults('1');
+
+		// $chat = $qb->getQuery()->getResult();
+
+		$chatRepository = $em->getRepository('chat');
+		$chat = $chatRepository->findBy(array(), array('id' => 'desc'), 1);	
 		
-		if ($user == false)
+		if($chat == false)
 		{
 			$context->message = "Il n'y a aucun chat";
 		}
-		return $user; 
+		return $chat;
 	}
 
 	/*
@@ -33,7 +42,7 @@ class chatTable
 		$chatRepository = $em->getRepository('chat');
 		$chats = $chatRepository->findAll();	
 		
-		if ($chats == false)
+		if($chats == false)
 		{
 			$context->message = "Il n'y a aucun chat";
 		}

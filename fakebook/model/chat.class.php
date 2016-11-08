@@ -12,13 +12,13 @@ class chat {
 	public $id;
 
 	/**
-	* @ManyToOne(targetEntity="utilisateur")
+	* @OneToOne(targetEntity="utilisateur")
 	* @JoinColumn(name="emetteur", referencedColumnName="id")
 	*/
 	public $emetteur;
 		
 	/**
-	* @ManyToOne(targetEntity="post")
+	* @OneToOne(targetEntity="post")
 	* @JoinColumn(name="post", referencedColumnName="id")
 	*/
 	public $post;
