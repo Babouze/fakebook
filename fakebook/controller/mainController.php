@@ -33,10 +33,21 @@ class mainController
 			return context::SUCCESS;
 		}
 	}
+
 	public static function logout($request,$context)
 	{
 		session_destroy();
 		// context::redirect('fakebook.php');
 		return context::SUCCESS;
 	}
+
+	public static function showMessage($request,$context)
+	{
+		$messageOfUser = messageTable::getMessageByUser(context::getSessionAttribute('id'));	
+
+		$context->listOfMessages = $messageOfUser;
+
+		return context::SUCCESS;
+	}
+
 }

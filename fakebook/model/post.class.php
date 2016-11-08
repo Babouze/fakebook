@@ -18,7 +18,7 @@ class post {
 	public $date;
 
 	/** @Column(type="string", length=45, nullable=true) */ 
-	public $pass;
+	public $image;
 }
 
 ?>

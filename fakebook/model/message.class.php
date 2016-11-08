@@ -6,7 +6,8 @@
  */
 class message {
 
-	/** @Id @Column(type="integer")
+	/** @Id 
+	 *  @Column(type="integer")
 	 *  @GeneratedValue
 	 */ 
 	public $id;
@@ -35,8 +36,10 @@ class message {
 	*/
 	public $post;
 
-	/** @Column(type="integer") */ 
-	public $aimer;
+	/** 
+	* @Column(type="integer") 
+	*/ 
+	public $aime;
 	
 }
 
