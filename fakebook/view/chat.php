@@ -12,3 +12,5 @@
 	<textarea type="text" class="message-input" placeholder="Type message..."></textarea>
 	<button type="submit" class="message-submit">Send</button>
 </div>
+
+<div class="bg"></div>

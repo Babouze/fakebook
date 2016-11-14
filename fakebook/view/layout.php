@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<link rel="icon" href="images/favicon.ico" />
 	<title>fakebook</title>
+	<link rel="stylesheet" href="css/default.css">
+	<script type="text/javascript" src="js/chat.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -11,11 +13,11 @@
 </head>
 <body class="">
 	<?php
-		if(context::isConnect())
-		{
+		// if(context::isConnect())
+		// {
 			include("header.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
 			include("chat.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
-		}
+		// }
 		
 		include($template_view);
 		include("footer.php");
