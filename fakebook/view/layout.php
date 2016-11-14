@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
+	<link rel="icon" href="images/favicon.ico" />
 	<title>fakebook</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -10,7 +11,9 @@
 </head>
 <body class="">
 	<?php
-		include("header.php");
+		include("header.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
+		include("chat.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
+		
 		include($template_view);
 		include("footer.php");
 	?>

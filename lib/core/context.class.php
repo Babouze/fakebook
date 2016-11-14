@@ -58,7 +58,12 @@ class context{
 		$_SESSION[$attribute]=$value;
 	}
     
-	
+	public function isConnect() {
+		if(!empty($_SESSION["id"]) && !empty($_SESSION["identifiant"]) && !empty($_SESSION["nom"]) && !empty($_SESSION["prenom"]) && !empty($_SESSION["date_de_naissance"]))
+			return true;
+		else
+			return false;
+	}
 	
 	public function __get($prop){
 		if(array_key_exists($prop, $this->data))        	
