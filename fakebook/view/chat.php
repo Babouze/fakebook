@@ -1,6 +1,6 @@
 <!-- Auteur : GARAYT Thomas -->
 
-<div id="live-chat">
+<div id="live-chat" style="z-index: 1000;">
 	<header class="clearfix">
 		<a href="#" class="chat-close">x</a>
 		<h4>Chat</h4>
@@ -21,10 +21,12 @@
 	</div> <!-- end chat -->
 </div> <!-- end live-chat -->
 
-
+<!--
+TOUTDOUX:
+	- Mettre un loader pendant les deux secondes avant le timer.
+	- Mettre le z-index du chat dans le css
+-->
 <script>
-
-
 	var timerChat = setInterval(refreshChat, 2000);
 
 	function refreshChat() {

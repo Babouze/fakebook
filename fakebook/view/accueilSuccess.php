@@ -23,13 +23,27 @@
 </div>
 
 <div class="container"><!-- Author : DAUDEL Adrien -->
-	<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+	<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+	</div>
+	<div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
 		<?php
 			if($context->listOfMessages)
 			{
 				foreach($context->listOfMessages as $message)
 				{
-					echo $message->post->texte." par ".$message->emetteur->nom." ".$message->emetteur->prenom;
+					echo '<div class="card">';
+						if(!empty($message->post->image))
+						{
+							echo '<img class="card-img-top" src="..." alt="Image du post">';
+						}
+						echo '<div class="card-block">';
+							echo '<h4 class="card-title">'.$message->emetteur->nom." ".$message->emetteur->prenom.'</h4>';
+							echo '<p class="card-text">'.$message->post->texte.'</p>';
+						echo '</div>';
+						echo '<div class="card-block">';
+							echo '<a href="#" class="card-link">J\'aime</a> <a href="#" class="card-link">Partager</a>';
+						echo '</div>';
+					echo '</div>';
 				}
 			}
 			else

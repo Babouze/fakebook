@@ -1,8 +1,19 @@
-/* Begin - CSS from Codepen.io */
-
 @charset "utf-8";
 /* CSS Document */
 
+/* Personnal CSS */
+
+.card {
+    position: relative;
+    display: block;
+    margin-bottom: .75rem;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+/* Begin - CSS from Codepen.io */
 /* ---------- GENERAL ---------- */
 
 body {

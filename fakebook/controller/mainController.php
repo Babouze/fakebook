@@ -63,9 +63,9 @@ class mainController
 	 */
 	public static function accueil($request	,$context)
 	{
-		$messageOfUser = messageTable::getMessages();	
+		$listOfMessages = messageTable::getMessages();	
 
-		$context->listOfMessages = $messageOfUser;
+		$context->listOfMessages = $listOfMessages;
 
 		return context::SUCCESS;
 	}
@@ -79,8 +79,6 @@ class mainController
 		$newChat = chatTable::getChats();	
 
 		$context->listOfChat = $newChat;
-		// print_r($newChat);
-
 
 		if(!is_null($newChat)) {
 			foreach($newChat as $chat) {
