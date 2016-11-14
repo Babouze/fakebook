@@ -23,7 +23,6 @@
 </nav>
 
 
-
 <?php 
   /*if(isset($context->message))*/ echo $context->message;
 ?>
@@ -36,7 +35,7 @@
       url:'Afakebook.php?action=logout',
       cache:'false',
       succces: function(returnHtml) {
-      }, 
+      }
     })
     window.location.replace("fakebook.php");
   }

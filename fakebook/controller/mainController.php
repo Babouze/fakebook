@@ -69,4 +69,32 @@ class mainController
 
 		return context::SUCCESS;
 	}
+
+
+	/*
+	* Auteur : GARAYT Thomas
+	*/
+	public static function refreshChat($requet, $context) {
+		
+		$newChat = chatTable::getChats();	
+
+		$context->listOfChat = $newChat;
+		// print_r($newChat);
+
+
+		if(!is_null($newChat)) {
+			foreach($newChat as $chat) {
+				echo '<div class="chat-message clearfix">';
+				echo '<img src="' . $chat->emetteur->avatar . '	" alt="Avatar par défaut" width="32" height="32">';
+				echo '<div class="chat-message-content clearfix">';
+				echo '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span>';
+				echo '<h5>' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '</h5>';
+				echo '<p>' . $chat->post->texte . '</p>';
+				echo '</div>';
+				echo '</div>';	
+			}
+		}
+
+		return context::SUCCESS;
+    }	
 }
