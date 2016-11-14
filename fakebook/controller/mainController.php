@@ -14,7 +14,8 @@ class mainController
 		else if(empty($_POST['login']) || empty($_POST['password']))
 		{
 			$context->message = "Erreur: veuillez remplir tous les champs.";
-			return context::SUCCESS;
+
+			return context::ERROR;
 		}
 		else if(isset($_POST['login']) && isset($_POST['password']))
 		{
@@ -29,15 +30,24 @@ class mainController
 				context::setSessionAttribute('statut', $res->statut);
 				context::setSessionAttribute('avatar', $res->avatar);
 				context::setSessionAttribute('date_de_naissance', $res->date_de_naissance);
+
+				context::redirect('fakebook.php?action=accueil');
+
 			}
-			return context::SUCCESS;
+			else {
+				$context->message = "Identifiants invalides";
+				return context::ERROR;
+			}
+			// return context::SUCCESS;
 		}
+
+		return context::SUCCESS;
 	}
 
 	public static function logout($request,$context)
 	{
 		session_destroy();
-		// context::redirect('fakebook.php');
+		// context::redirect('fakebook.php?action=login');
 		return context::SUCCESS;
 	}
 
@@ -50,4 +60,7 @@ class mainController
 		return context::SUCCESS;
 	}
 
+	public static function accueil($request	,$context) {
+		return context::SUCCESS;
+	}
 }
