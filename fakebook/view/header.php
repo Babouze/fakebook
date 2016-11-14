@@ -17,10 +17,7 @@
       </ul>
   		<div class="nav navbar-nav navbar-right">
   			<button class="btn btn-danger" onClick="logout()">Déconnexion</button>
-  		</div>	
-      <div class="nav navbar-nav navbar-right">
-          Bonjour <?php echo context::getSessionAttribute('nom') . " " . context::getSessionAttribute('prenom');?>
-      </div>
+  		</div>
     </div>
   </div>
 </nav>

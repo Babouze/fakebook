@@ -16,7 +16,7 @@ class messageTable
 
 		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi l'émetteur
 		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser);	
-		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser);;
+		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser);
 
 		foreach($listOfMessageDestinataire as $message) {
 			array_push($listOfMessage,$message);
@@ -35,10 +35,28 @@ class messageTable
 			
 		}
 
-		
 		if(!empty($listOfMessage))
 		{
 			$context->message = "Aucun message pour cet utilisateur";
+		}
+
+		return $listOfMessage; 
+	}
+
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function getMessages()
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$messageRepository = $em->getRepository('message');
+
+		$listOfMessage = $messageRepository->findAll();
+		
+		if(!empty($listOfMessage))
+		{
+			$context->message = "Aucun message";
 		}
 
 		return $listOfMessage; 

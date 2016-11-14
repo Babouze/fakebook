@@ -13,11 +13,11 @@
 </head>
 <body class="">
 	<?php
-		// if(context::isConnect())
-		// {
+		if(context::isConnect())
+		{
 			include("header.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
 			include("chat.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
-		// }
+		}
 		
 		include($template_view);
 		include("footer.php");

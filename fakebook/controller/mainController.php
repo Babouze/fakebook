@@ -58,7 +58,15 @@ class mainController
 		return context::SUCCESS;
 	}
 
-	public static function accueil($request	,$context) {
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function accueil($request	,$context)
+	{
+		$messageOfUser = messageTable::getMessages();	
+
+		$context->listOfMessages = $messageOfUser;
+
 		return context::SUCCESS;
 	}
 }
