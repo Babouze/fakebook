@@ -1,1 +1,0 @@
-Pour l'utilisation de ces méthodes, doctrine utilise, avec la méthode findBy() ou findOneBy(), la méthode magique __call() de php qui va exécuter du code en fonction de la méthode appelée
