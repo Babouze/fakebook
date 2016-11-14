@@ -1,4 +1,5 @@
 
+<div class="col-lg-4"></div>
 <div class="col-lg-2">
 	<form method="post" enctype="multipart/form-data" action="fakebook.php?action=login">
 		
@@ -14,3 +15,4 @@
 		</div>
 	</form>
 </div>
+<div class="col-lg-4"></div>
