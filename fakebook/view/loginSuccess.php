@@ -14,5 +14,9 @@
 			<button type="submit" class="btn">Se connecter</button>
 		</div>
 	</form>
+	<div class="row">
+			<h4 class="red"><?php echo $context->message; ?></H4>
+
+	</div>
 </div>
 <div class="col-lg-4"></div>

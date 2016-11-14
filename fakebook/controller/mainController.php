@@ -9,13 +9,11 @@ class mainController
 {
 	public static function login($request,$context)
 	{
-		if(empty($_POST['login']) && empty($_POST['password']))
-			return context::SUCCESS;
-		else if(empty($_POST['login']) || empty($_POST['password']))
+		if(empty($_POST['login']) || empty($_POST['password']))
 		{
-			$context->message = "Erreur: veuillez remplir tous les champs.";
+			$context->message = "Erreur : veuillez remplir tous les champs.";
 
-			return context::ERROR;
+			return context::SUCCESS;
 		}
 		else if(isset($_POST['login']) && isset($_POST['password']))
 		{
@@ -35,8 +33,8 @@ class mainController
 
 			}
 			else {
-				$context->message = "Identifiants invalides";
-				return context::ERROR;
+				$context->message = "Erreur : Identifiants invalides";
+				return context::SUCCESS;
 			}
 			// return context::SUCCESS;
 		}
@@ -47,7 +45,7 @@ class mainController
 	public static function logout($request,$context)
 	{
 		session_destroy();
-		// context::redirect('fakebook.php?action=login');
+		// context::redirect('fakebook.php');
 		return context::SUCCESS;
 	}
 
