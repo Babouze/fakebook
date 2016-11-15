@@ -35,12 +35,12 @@ class chatTable
 	/*
 	 * author : GARAYT Thomas
 	 */
-	public static function getChats()
+	public static function getChats($limit = 100)
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;
 
 		$chatRepository = $em->getRepository('chat');
-		$chats = $chatRepository->findAll();	
+		$chats = $chatRepository->findAll(array(),array(),$limit);	
 		
 		if($chats == false)
 		{

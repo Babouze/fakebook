@@ -3,6 +3,10 @@
 
 /* Personnal CSS */
 
+.loader {
+  height:32px;
+}
+
 .card {
     position: relative;
     display: block;
@@ -106,7 +110,7 @@ p { margin: 0; }
   border-radius: 5px 5px 0 0;
   color: #fff;
   cursor: pointer;
-  padding: 16px 24px;
+  padding: 1px 24px;
 }
 
 #live-chat h4:before {
@@ -156,7 +160,7 @@ p { margin: 0; }
   width: 28px;
 }
 
-.chat-close {
+.chat-minimize {
   background: #1b2126;
   border-radius: 50%;
   color: #fff;
@@ -165,9 +169,13 @@ p { margin: 0; }
   font-size: 10px;
   height: 16px;
   line-height: 16px;
-  margin: 2px 0 0 0;
+  margin: 10px 0 0 0;
   text-align: center;
   width: 16px;
+}
+
+.chat-minimize:hover {
+  decoration:none;
 }
 
 .chat {
