@@ -48,6 +48,46 @@ class chatTable
 		}
 		return $chats; 
 	}
+
+	/*
+	 * author : GARAYT Thomas
+	 */
+	public static function setNewChat($message,$idUser)
+	{
+		$em = dbconnection::getInstance()->getEntityManager();
+
+		$chatRepository = $em->getRepository('chat');
+		$utilisateurRepository = $em->getRepository('utilisateur');
+
+	 	$utilisateur = $utilisateurRepository->findOneById($idUser);
+
+		$newChat = new chat;
+		$newPost = new post;
+
+		$newPost->texte = $message;
+		$newPost->date = new DateTime();
+
+		$em->persist($newPost);
+		$em->flush();
+
+		// $idPost = $newPost->id;
+
+		$newChat->post = $newPost;
+		$newChat->emetteur =  $utilisateur;
+
+		$em->persist($newChat);
+		$em->flush();
+
+		return $newChat; 
+	}
+
+
+	public static function flushEntity($entity) {
+		$em = dbconnection::getInstance()->getEntityManager();
+		$em->persist($entity);
+		$em->flush();
+	}
+
 }
 
 ?>

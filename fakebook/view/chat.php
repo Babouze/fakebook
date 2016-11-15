@@ -12,12 +12,10 @@
 			<hr>
 
 		</div>
-		<form action="#" method="post">
 			<fieldset>
-				<input type="text" placeholder="Votre message" autofocus>
+				<input id="messageChat" type="text" placeholder="Votre message" autofocus>
 				<input type="hidden">
 			</fieldset>
-		</form>
 	</div> <!-- end chat -->
 </div> <!-- end live-chat -->
 
@@ -41,12 +39,39 @@ TOUTDOUX:
 				$("#chatHistory").html(returnData);
 				// récupérer les nouveaux messages et non pas tous les messages
 				// afficher seulement les nouveaux messages
-			},
-			error: function(data) {
-				alert("ERROR");
 			}
 		})
 
+	}
+
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	        sendMessageChat();
+	    }
+	});
+
+
+	function sendMessageChat() {
+
+		// TODO : Loader send show
+
+		// Message to send
+		DATA = $("#messageChat").val();
+
+		if(DATA != "") {
+
+			$.ajax({
+				type:'POST',
+				async: true,
+				data: { DATA } ,
+				url:'Afakebook.php?action=sendMessage',
+				cache: false,
+				success: function(returnData) {
+					// TODO : Loader send hide
+					refreshChat();
+				}
+			})
+		}
 	}
 
 	function refreshChatError() {
@@ -56,6 +81,8 @@ TOUTDOUX:
 	function refreshChatSuccess() {
 		$("#chatHistory").append("bidule<br>");		
 	}
+
+	$('.chat').hide();
 
 	(function() {
 

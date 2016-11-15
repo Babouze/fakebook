@@ -74,7 +74,7 @@ class mainController
 	/*
 	* Auteur : GARAYT Thomas
 	*/
-	public static function refreshChat($requet, $context) {
+	public static function refreshChat($request, $context) {
 		
 		$newChat = chatTable::getChats();	
 
@@ -82,8 +82,16 @@ class mainController
 
 		if(!is_null($newChat)) {
 			foreach($newChat as $chat) {
+
+				if($chat->emetteur->avatar != '') {
+					$av = $chat->emetteur->avatar;
+				}
+				else {
+					$av = "images/default-avatar.png";
+				}	
+
 				echo '<div class="chat-message clearfix">';
-				echo '<img src="' . $chat->emetteur->avatar . '	" alt="Avatar par défaut" width="32" height="32">';
+				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
 				echo '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span>';
 				echo '<h5>' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '</h5>';
@@ -95,4 +103,18 @@ class mainController
 
 		return context::SUCCESS;
     }	
+
+
+	/*
+	* Auteur : GARAYT Thomas
+	*/
+    public static function sendMessage($request,$context) {
+    	$message = $_POST['DATA'];
+    	echo "Coucou";
+    	$idUser = context::getSessionAttribute('id');
+
+		$newChat = chatTable::setNewChat($message,$idUser);	
+
+		return context::SUCCESS;
+    }
 }
