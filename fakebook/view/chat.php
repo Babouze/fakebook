@@ -2,7 +2,6 @@
 
 <div id="live-chat" style="z-index: 1000;">
 	<header class="clearfix">
-		<a href="#" class="chat-close">x</a>
 		<h4>Chat</h4>
 		<span class="chat-message-counter">3</span>
 	</header>
@@ -12,12 +11,14 @@
 			<hr>
 
 		</div>
+		<div class="row">
 			<fieldset>
 				<input id="messageChat" type="text" placeholder="Votre message" autofocus>
 				<input type="hidden">
 			</fieldset>
-	</div> <!-- end chat -->
-</div> <!-- end live-chat -->
+		</div>
+	</div>
+</div>
 
 <!--
 TOUTDOUX:
@@ -25,9 +26,11 @@ TOUTDOUX:
 	- Mettre le z-index du chat dans le css
 -->
 <script>
-	var timerChat = setInterval(refreshChat, 2000);
+	var timerChat = setInterval(refreshChat(false), 2000);
 
-	function refreshChat() {
+	$('#loaderMessage').hide();
+
+	function refreshChat(scrollBottom) {
 
 		$.ajax({
 			type:'POST',
@@ -36,11 +39,16 @@ TOUTDOUX:
 			cache: false,
 			success: function(returnData) {
 				// alert(returnData);
-				$("#chatHistory").html(returnData);
+				$("#chatHistory").html(returnData);	
+				if(scrollBottom == true) {
+					$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);
+				}
+				<!-- TODO -->
 				// récupérer les nouveaux messages et non pas tous les messages
 				// afficher seulement les nouveaux messages
 			}
 		})
+
 
 	}
 
@@ -53,12 +61,14 @@ TOUTDOUX:
 
 	function sendMessageChat() {
 
-		// TODO : Loader send show
+		$('#loaderMessage').show();
 
 		// Message to send
 		DATA = $("#messageChat").val();
 
 		if(DATA != "") {
+
+		    $("#messageChat").val('');
 
 			$.ajax({
 				type:'POST',
@@ -67,35 +77,27 @@ TOUTDOUX:
 				url:'Afakebook.php?action=sendMessage',
 				cache: false,
 				success: function(returnData) {
-					// TODO : Loader send hide
-					refreshChat();
+					$('#loaderMessage').hide();
+
+					refreshChat(true);
+
+
 				}
 			})
 		}
 	}
 
-	function refreshChatError() {
-		console.log("Error");
-	}
-
-	function refreshChatSuccess() {
-		$("#chatHistory").append("bidule<br>");		
-	}
-
 	$('.chat').hide();
+	$('.chat-message-counter').show();
 
 	(function() {
 
 		$('#live-chat header').on('click', function() {
+
+			$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);		
 			$('.chat').slideToggle(300, 'swing');
 			$('.chat-message-counter').fadeToggle(300, 'swing');
 		});
-
-		$('.chat-close').on('click', function(e) {
-			e.preventDefault();
-			$('#live-chat').fadeOut(300);
-		});
-
 	}) ();
 
 </script>

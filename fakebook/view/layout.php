@@ -24,7 +24,7 @@
 		if(context::isConnect())
 		{
 			include("header.php");
-			// include("chat.php");
+			include("chat.php");
 		}
 		
 		include($template_view);

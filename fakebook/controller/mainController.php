@@ -76,7 +76,7 @@ class mainController
 	*/
 	public static function refreshChat($request, $context) {
 		
-		$newChat = chatTable::getChats();	
+		$newChat = chatTable::getChats(5);	
 
 		$context->listOfChat = $newChat;
 
@@ -110,7 +110,7 @@ class mainController
 	*/
     public static function sendMessage($request,$context) {
     	$message = $_POST['DATA'];
-    	echo "Coucou";
+
     	$idUser = context::getSessionAttribute('id');
 
 		$newChat = chatTable::setNewChat($message,$idUser);	
