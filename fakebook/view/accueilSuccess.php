@@ -17,6 +17,7 @@
 							<div class="caption">
 								<h3><?php echo context::getSessionAttribute('nom')." ".context::getSessionAttribute('prenom'); ?></h3>
 								<p><?php echo date_format(context::getSessionAttribute('date_de_naissance'), 'd-m-Y'); ?></p>
+								<?php if(context::getSessionAttribute('statut') != "") echo '<p>'.context::getSessionAttribute('statut').'</p>'; ?>
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">

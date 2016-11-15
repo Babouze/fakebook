@@ -60,6 +60,31 @@ class mainController
 	}
 
 	/*
+	* Author : DAUDEL Adrien
+	*/
+	public static function friends($request, $context)
+	{
+		$listOfUsers = utilisateurTable::getUsers();
+
+		if(!is_null($listOfUsers))
+		{
+			foreach($listOfUsers as $user)
+			{
+				if($user->avatar != '')
+				{
+					$av = $user->avatar;
+				}
+				else {
+					$av = "images/default-avatar.png";
+				}	
+				echo '<li><a href="fakebook.php?action=profile&id='.$user->id.'"><img class="img-circle img-responsive img-raised" src="'.$av.'" alt="Avatar utilisateur" width="16" height="16">'.$user->nom." ".$user->prenom.'</a></li>';
+			}
+		}
+
+		return context::SUCCESS;
+    }
+
+	/*
 	 * Author : DAUDEL Adrien
 	 */
 	public static function profile($request	,$context)
@@ -102,7 +127,7 @@ class mainController
 		}
 
 		return context::SUCCESS;
-    }	
+    }
 
 
 	/*

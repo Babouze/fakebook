@@ -11,7 +11,7 @@
     background-color: #fff;
     border-radius: .25rem;
     border: 1px solid rgba(0,0,0,.125);	
-	margin: 20px;
+    margin: 20px;
 }
 
 #login-wrapper
@@ -24,6 +24,13 @@
 #profile-card
 {
   top:-30px;
+}
+
+.scrollable-menu
+{
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
 }
 
 /* Begin - CSS from Codepen.io */

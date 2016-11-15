@@ -1,16 +1,43 @@
+<script type="text/javascript">
+	$(document).ready(getFriends());
+	function getFriends() {
+
+		$.ajax({
+			type:'POST',
+			async: true,
+			url:'Afakebook.php?action=friends',
+			cache: false,
+			success: function(returnData) {
+				// alert(returnData);
+				$("#friends").append(returnData);
+				// récupérer les nouveaux messages et non pas tous les messages
+				// afficher seulement les nouveaux messages
+			}
+		})
+	}
+</script>
+
 <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only"><i class="material-icons">unarchive</i></span>
+				<i class="material-icons">menu</i>
 			</button>
-			<a class="navbar-brand" href="fakebook.php">Fakebook</a>
+			<a class="navbar-brand" href="fakebook.php">fakebook</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="fakebook.php?action=accueil">Accueil<span class="sr-only">(current)</span></a></li>
 				<li><a href="fakebook.php?action=profile&id=<?php echo context::getSessionAttribute('id'); ?>">Profil<span class="sr-only"></span></a></li>
+				<li class="dropdown">
+					<a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Amis
+						<b class="caret"></b>
+					<div class="ripple-container"></div></a>
+					<ul class="dropdown-menu dropdown-menu-right scrollable-menu" id="friends">
+						<li class="dropdown-header">Liste d'amis</li>
+					</ul>
+				</li>
 				<li><button class="btn btn-primary btn-danger" onClick="logout()">Déconnexion</button></li>
 			</ul>
 		</div>

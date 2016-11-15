@@ -1,5 +1,5 @@
 <div class="wrapper"><!-- Author : DAUDEL Adrien -->
-		<div class="header header-filter" style="background-image: url('images/city.jpg');"></div>
+		<div class="header header-filter" style="background-image: url('images/bg3.jpeg');"></div>
 
 		<div class="main main-raised">
 			<div class="profile-content">
@@ -17,23 +17,37 @@
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
 								<p><?php echo date_format($context->profile->date_de_naissance, 'd-m-Y'); ?></p>
+								<?php if($context->profile->statut != "") echo '<p>'.$context->profile->statut.'</p>'; ?>
 							</div>
 						</div>
-						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form action="Afakebook.php?action=post" method="post" enctype="multipart/form-data">		
-								<div class="form-group label-floating is-empty">
-									<label for="post" class="control-label">Postez un message</label>
-									<input type="text" class="form-control" name="post" />
-									<span class="material-input"></span>
-								</div>
-								<div class="form-group label-floating is-fileinput">
-									<!-- <label class="control-label" for="image">Ajouter une image</label> -->
-									<input type="file" name="image" accept="image/*" />
-									<input type="text" readonly class="form-control" placeholder="Ajouter une image..">
-								</div>
-								<input class="btn btn-danger" type="submit" name="post" value="Poster">
-							</form>
-						</div>
+						<?php if($_GET['id'] != context::getSessionAttribute('id')) { ?>
+							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+								<form action="Afakebook.php?action=post" method="post" enctype="multipart/form-data">		
+									<div class="form-group label-floating is-empty">
+										<label for="post" class="control-label">Postez un message</label>
+										<input type="text" class="form-control" name="post" />
+										<span class="material-input"></span>
+									</div>
+									<div class="form-group label-floating is-fileinput">
+										<!-- <label class="control-label" for="image">Ajouter une image</label> -->
+										<input type="file" name="image" accept="image/*" />
+										<input type="text" readonly class="form-control" placeholder="Ajouter une image..">
+									</div>
+									<input class="btn btn-danger" type="submit" name="post" value="Poster">
+								</form>
+							</div>
+						<?php } else { ?>
+							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+								<form action="Afakebook.php?action=statut" method="post" enctype="multipart/form-data">		
+									<div class="form-group label-floating is-empty">
+										<label for="post" class="control-label">Modifier votre statut</label>
+										<input type="text" class="form-control" name="post" />
+										<span class="material-input"></span>
+									</div>
+									<input class="btn btn-danger" type="submit" name="post" value="Valider">
+								</form>
+							</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
