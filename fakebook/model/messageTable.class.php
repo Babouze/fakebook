@@ -56,7 +56,7 @@ class messageTable
 		
 		if(!empty($listOfMessage))
 		{
-			$context->message = "Aucun message";
+			//$context->message = "Aucun message";
 		}
 
 		return $listOfMessage; 

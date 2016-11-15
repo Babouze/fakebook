@@ -1,22 +1,41 @@
+<script type="text/javascript">
+	$('body').css('background-image', 'url(\'images/bg.jpg\')');
+</script>
 
-<div class="col-lg-4"></div>
-<div class="col-lg-2">
-	<form method="post" enctype="multipart/form-data" action="fakebook.php?action=login">
-		
-		<div class="input-group">
-			<input name="login" type="text" class="form-control" placeholder="Nom d'utilisateur" aria-describedby="basic-addon1" aria-required="true">
-		</div>
+<div class="wrapper" id="login-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+				<div class="card card-signup">
+					<form class="form" method="post" action="fakebook.php?action=login" enctype="multipart/form-data">
+						<div class="header header-primary text-center">
+							<h4>fakebook</h4>
+							<!-- TODO: ajouter le logo une fois designé -->
+						</div>
+						<!-- <p class="text-divider">Or Be Classical</p> -->
+						<div class="content">
 
-		<div class="input-group">
-			<input name="password" type="password" class="form-control" placeholder="Mot de passe" aria-describedby="basic-addon1" aria-required="true">
-		</div>
-		<div class="input-group">
-			<button type="submit" class="btn">Se connecter</button>
-		</div>
-	</form>
-	<div class="row">
-			<h4 class="red"><?php echo $context->message; ?></H4>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">face</i>
+								</span>
+								<input name="login" type="text" class="form-control" placeholder="Nom d'utilisateur" aria-describedby="basic-addon1" aria-required="true">
+							</div>
 
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">lock_outline</i>
+								</span>
+								<input name="password" type="password" class="form-control" placeholder="Mot de passe" aria-describedby="basic-addon1" aria-required="true">
+							</div>
+							<h4 class="red"><?php if(!empty($context->message)) echo '<div class="row">'.$context->message.'</div>'; ?></h4>
+						</div>
+						<div class="footer text-center">
+							<button type="submit" class="btn btn-simple btn-primary btn-lg">Se connecter</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-<div class="col-lg-4"></div>

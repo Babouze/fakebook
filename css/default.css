@@ -10,7 +10,21 @@
     padding: 10px;
     background-color: #fff;
     border-radius: .25rem;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0,0,0,.125);	
+	margin: 20px;
+}
+
+#login-wrapper
+{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top:30%;
+}
+
+#profile-card
+{
+  top:-30px;
 }
 
 /* Begin - CSS from Codepen.io */

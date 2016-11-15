@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
 	<link rel="icon" href="images/favicon.ico" />
 	<title>fakebook</title>
+
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/default.css">
+
 	<script type="text/javascript" src="js/chat.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="js/material.min.js"></script>
+	<script src="js/nouislider.min.js" type="text/javascript"></script>
+	<script src="js/material-kit.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link href="css/material-kit.css" rel="stylesheet"/>
 </head>
-<body class="">
+<body>
 	<?php
 		if(context::isConnect())
 		{
-			include("header.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
-			include("chat.php"); // Ne pas afficher si l'utilisateur n'est pas connecté
+			include("header.php");
+			include("chat.php");
 		}
 		
 		include($template_view);
