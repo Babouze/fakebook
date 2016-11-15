@@ -1,22 +1,22 @@
 <div class="wrapper"><!-- Author : DAUDEL Adrien -->
-		<div class="header header-filter" style="background-image: url('images/city.jpg'); background-size: cover; background-repeat: no-repeat;"></div>
+		<div class="header header-filter" style="background-image: url('images/city.jpg');"></div>
 
 		<div class="main main-raised">
 			<div class="profile-content">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
-							<?php if(context::getSessionAttribute('avatar') != "")
+							<?php if($context->profile->avatar != "")
 							{
-								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.context::getSessionAttribute('avatar').'" alt="Votre avatar">';
+								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
 							}
 							else
 							{
 								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar">';
 							} ?>
 							<div class="caption">
-								<h3><?php echo context::getSessionAttribute('nom')." ".context::getSessionAttribute('prenom'); ?></h3>
-								<p><?php echo date_format(context::getSessionAttribute('date_de_naissance'), 'd-m-Y'); ?></p>
+								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
+								<p><?php echo date_format($context->profile->date_de_naissance, 'd-m-Y'); ?></p>
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">

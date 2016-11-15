@@ -49,11 +49,12 @@ class mainController
 		return context::SUCCESS;
 	}
 
-	public static function showMessage($request,$context)
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function accueil($request	,$context)
 	{
-		$messageOfUser = messageTable::getMessageByUser(context::getSessionAttribute('id'));	
-
-		$context->listOfMessages = $messageOfUser;
+		$context->listOfMessages = messageTable::getMessages();
 
 		return context::SUCCESS;
 	}
@@ -61,15 +62,14 @@ class mainController
 	/*
 	 * Author : DAUDEL Adrien
 	 */
-	public static function accueil($request	,$context)
+	public static function profile($request	,$context)
 	{
-		$listOfMessages = messageTable::getMessages();	
+		$context->listOfMessages = messageTable::getMessageByUser($_GET['id']);
 
-		$context->listOfMessages = $listOfMessages;
+		$context->profile = utilisateurTable::getUserById($_GET['id']);
 
 		return context::SUCCESS;
 	}
-
 
 	/*
 	* Auteur : GARAYT Thomas

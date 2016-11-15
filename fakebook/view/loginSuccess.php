@@ -1,5 +1,7 @@
 <script type="text/javascript">
 	$('body').css('background-image', 'url(\'images/bg.jpg\')');
+	$('body').css('background-size', 'cover');
+	$('body').css('background-repeat', 'no-repeat');
 </script>
 
 <div class="wrapper" id="login-wrapper">
@@ -12,7 +14,6 @@
 							<h4>fakebook</h4>
 							<!-- TODO: ajouter le logo une fois designé -->
 						</div>
-						<!-- <p class="text-divider">Or Be Classical</p> -->
 						<div class="content">
 
 							<div class="input-group">

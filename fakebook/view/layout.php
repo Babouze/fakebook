@@ -19,12 +19,12 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 	<link href="css/material-kit.css" rel="stylesheet"/>
 </head>
-<body>
+<body style="background-color: #191919;">
 	<?php
 		if(context::isConnect())
 		{
 			include("header.php");
-			include("chat.php");
+			// include("chat.php");
 		}
 		
 		include($template_view);

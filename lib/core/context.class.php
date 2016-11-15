@@ -18,7 +18,7 @@ class context{
 	}
 	
 	private function __construct(){
-	  			
+    		  			
 	}
 	
 	public function init($name){

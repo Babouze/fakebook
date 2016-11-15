@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 'on');
+ini_set('error_reporting', 'E_STRICT');
 
 //nom de l'application
 $nameApp = "fakebook";

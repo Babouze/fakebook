@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="color: #FFF;">
 	<div class="container">
 		<nav class="pull-left">
 			<ul>
