@@ -77,7 +77,7 @@ class mainController
 				else {
 					$av = "images/default-avatar.png";
 				}	
-				echo '<li><a href="fakebook.php?action=profile&id='.$user->id.'"><img class="img-circle img-responsive img-raised" src="'.$av.'" alt="Avatar utilisateur" width="16" height="16">'.$user->nom." ".$user->prenom.'</a></li>';
+				echo '<li><a title="' . $user->nom . " " . $user->prenom . '" href="fakebook.php?action=profile&id=' . $user->id . '"><img class="img-circle img-raised img-listeamis" src="'.$av.'" alt="Avatar utilisateur" width="16" height="16"> ' . $user->nom . " " . $user->prenom . '</a></li>';
 			}
 		}
 
@@ -115,6 +115,7 @@ class mainController
 					$av = "images/default-avatar.png";
 				}	
 
+				echo '<hr>';
 				echo '<div class="chat-message clearfix">';
 				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
