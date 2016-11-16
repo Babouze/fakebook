@@ -16,18 +16,22 @@
 	</div>
 </div>
 
-<!--
-TOUTDOUX:
-	- Mettre un loader pendant les deux secondes avant le timer.
-	- Mettre le z-index du chat dans le css
--->
 <script>
+	/* Timer pour le rafraichissement du chat toutes les 2 secondes */
 	var timerChat = setInterval(refreshChat(false), 2000);
 
+	/* On rafraichit une premiere fois en scrollant en bas du chat */
+	refreshChat(true);
+
+	$('.chat').hide();
+	$('.chat-message-counter').show();
+	$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);	
+
+	/* On cache le gif de loading */
 	$('#loaderMessage').hide();
 
+	/* Fonction qui va requeter la base de donnée pour rafraichir le chat */
 	function refreshChat(scrollBottom) {
-
 		$.ajax({
 			type:'POST',
 			async: true,
@@ -44,17 +48,16 @@ TOUTDOUX:
 				// afficher seulement les nouveaux messages
 			}
 		})
-
-
 	}
 
+	/* Soumission du message du chat lorsque l'on appuie sur "Enter" */
 	$(document).keypress(function(e) {
 	    if(e.which == 13) {
 	        sendMessageChat();
 	    }
 	});
 
-
+	/* Fonction permet de requeter la base de donnée pour enregister un nouveau message */
 	function sendMessageChat() {
 
 		$('#loaderMessage').show();
@@ -83,8 +86,6 @@ TOUTDOUX:
 		}
 	}
 
-	$('.chat').hide();
-	$('.chat-message-counter').show();
 
 	(function() {
 
