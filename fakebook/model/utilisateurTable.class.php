@@ -45,7 +45,7 @@ class utilisateurTable
 		$em = dbconnection::getInstance()->getEntityManager() ;
 
 		$userRepository = $em->getRepository('utilisateur');
-		$users = $userRepository->findAll();	
+		$users = $userRepository->findBy(array(),array('nom' => 'ASC' ));	
 		
 		if(empty($users))
 		{

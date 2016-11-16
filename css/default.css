@@ -7,6 +7,10 @@
   height:32px;
 }
 
+.img-listeamis {
+  display:inline;
+}
+
 .card {
     position: relative;
     display: block;
