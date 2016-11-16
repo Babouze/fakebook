@@ -11,6 +11,10 @@
   display:inline;
 }
 
+.fieldsetChat {
+  padding-left:10px;
+}
+
 .card {
     position: relative;
     display: block;

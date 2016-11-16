@@ -8,15 +8,11 @@
 	<div class="chat">
 		<div id="chatHistory"  class="chat-history">
 
-			<hr>
-
 		</div>
-		<div class="row">
-			<fieldset>
-				<input id="messageChat" type="text" placeholder="Votre message" autofocus>
-				<input type="hidden">
-			</fieldset>
-		</div>
+		<fieldset class="fieldsetChat">
+			<input id="messageChat" type="text" placeholder="Votre message" autofocus>
+			<input type="hidden">
+		</fieldset>
 	</div>
 </div>
 

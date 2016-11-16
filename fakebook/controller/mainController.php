@@ -115,6 +115,7 @@ class mainController
 					$av = "images/default-avatar.png";
 				}	
 
+				echo '<hr>';
 				echo '<div class="chat-message clearfix">';
 				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
