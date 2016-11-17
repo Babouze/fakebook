@@ -1,4 +1,5 @@
-<div class="wrapper"><!-- Author : DAUDEL Adrien -->
+<!-- Author : DAUDEL Adrien -->
+<div class="wrapper">
 		<div class="header header-filter" style="background-image: url('images/city.jpg'); background-size: cover; background-repeat: no-repeat;"></div>
 
 		<div class="main main-raised">
@@ -21,7 +22,7 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form action="Afakebook.php?action=post" method="post" enctype="multipart/form-data">		
+							<form action="Afakebook.php?action=postNewMessage" method="post" enctype="multipart/form-data">		
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
 									<input type="text" class="form-control" name="post" />

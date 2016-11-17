@@ -3,7 +3,7 @@
 <div id="live-chat" style="z-index: 1000;">
 	<header class="clearfix">
 		<h4>Chat</h4>
-		<span class="chat-message-counter">3</span>
+		<span class="hide chat-message-counter">x</span>
 	</header>
 	<div class="chat">
 		<div id="chatHistory"  class="chat-history">
@@ -17,19 +17,20 @@
 </div>
 
 <script>
+	$( document ).ready(function() {
 
-	/* On hide le chat, on descend en bas du chat */
+		/* On hide le chat, on descend en bas du chat */
+		// refreshChat("true");
+		$('.chat').hide();
+		$('.chat-message-counter').show();
+		$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
 
+
+	});
 	
-
-	$('.chat').hide();
-	$('.chat-message-counter').show();
-	refreshChat("true");
-	// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-
-	/* Timer pour le rafraichissement du chat toutes les 2 secondes */
-	setInterval('refreshChat("false")', 4000);
-
+	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	
+	setInterval('refreshChat("false")', 1000);	
+		
 	/* Fonction qui va requeter la base de donnée pour rafraichir le chat */
 	function refreshChat(scrollBottom) {
 		console.log(scrollBottom);
@@ -89,5 +90,7 @@
 			$('.chat-message-counter').fadeToggle(300, 'swing');
 		});
 	}) ();
+
+
 
 </script>

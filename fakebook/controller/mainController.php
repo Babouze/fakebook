@@ -142,4 +142,8 @@ class mainController
 
 		return context::SUCCESS;
     }
+
+    public static function postNewMessage($request,$context) {
+    	return context::SUCCESS;	
+    }
 }
