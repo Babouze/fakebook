@@ -17,21 +17,22 @@
 </div>
 
 <script>
-	/* Timer pour le rafraichissement du chat toutes les 2 secondes */
-	var timerChat = setInterval(refreshChat(false), 2000);
 
-	/* On rafraichit une premiere fois en scrollant en bas du chat */
-	refreshChat(true);
+	/* On hide le chat, on descend en bas du chat */
+
+	
 
 	$('.chat').hide();
 	$('.chat-message-counter').show();
-	$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);	
+	refreshChat("true");
+	// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
 
-	/* On cache le gif de loading */
-	$('#loaderMessage').hide();
+	/* Timer pour le rafraichissement du chat toutes les 2 secondes */
+	setInterval('refreshChat("false")', 4000);
 
 	/* Fonction qui va requeter la base de donnée pour rafraichir le chat */
 	function refreshChat(scrollBottom) {
+		console.log(scrollBottom);
 		$.ajax({
 			type:'POST',
 			async: true,
@@ -39,13 +40,13 @@
 			cache: false,
 			success: function(returnData) {
 				// alert(returnData);
-				$("#chatHistory").html(returnData);	
-				if(scrollBottom == true) {
-					$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);
+				$('#chatHistory').html(returnData);	
+				if(scrollBottom == 'true') {
+					$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
 				}
-				<!-- TODO -->
-				// récupérer les nouveaux messages et non pas tous les messages
-				// afficher seulement les nouveaux messages
+				// TODO
+				// Récupérer ladate du dernier chat
+				// Ne récupérer que les messages dont la date est supérieure à la date et .append()
 			}
 		})
 	}
@@ -59,8 +60,6 @@
 
 	/* Fonction permet de requeter la base de donnée pour enregister un nouveau message */
 	function sendMessageChat() {
-
-		$('#loaderMessage').show();
 
 		// Message to send
 		DATA = $("#messageChat").val();
@@ -76,11 +75,7 @@
 				url:'Afakebook.php?action=sendMessage',
 				cache: false,
 				success: function(returnData) {
-					$('#loaderMessage').hide();
-
-					refreshChat(true);
-
-
+					refreshChat("true");
 				}
 			})
 		}
@@ -88,10 +83,8 @@
 
 
 	(function() {
-
 		$('#live-chat header').on('click', function() {
-
-			$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);		
+			$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
 			$('.chat').slideToggle(300, 'swing');
 			$('.chat-message-counter').fadeToggle(300, 'swing');
 		});

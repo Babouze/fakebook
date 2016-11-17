@@ -101,7 +101,7 @@ class mainController
 	*/
 	public static function refreshChat($request, $context) {
 		
-		$newChat = chatTable::getChats(5);	
+		$newChat = chatTable::getChats();	
 
 		$context->listOfChat = $newChat;
 
@@ -119,8 +119,7 @@ class mainController
 				echo '<div class="chat-message clearfix">';
 				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
-				echo '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span>';
-				echo '<h5>' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '</h5>';
+				echo '<h5>' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
 				echo '<p>' . $chat->post->texte . '</p>';
 				echo '</div>';
 				echo '</div>';	
