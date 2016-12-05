@@ -22,16 +22,16 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form action="fakebook.php?action=postNewMessage" method="POST" enctype="multipart/form-data">
+							<form id="postForm" method="POST" enctype="multipart/form-data">
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
-									<input type="text" class="form-control" name="message" />
+									<input type="text" class="form-control" id='message' name="message" />
 									<span class="material-input"></span>
 								</div>
 								<div class="form-group label-floating is-fileinput">
 									<!-- <label class="control-label" for="image">Ajouter une image</label> -->
-									<input type="file" name="image" accept="image/*" />
-									<input type="text" readonly class="form-control" placeholder="Ajouter une image..">
+									<input type="file" id='image' name="image" accept="image/*" />
+									<input type="text" id="image-text" readonly class="form-control" placeholder="Ajouter une image..">
 								</div>
 								<input class="btn btn-danger" type="submit" name="post" value="Poster">
 							</form>
@@ -39,8 +39,6 @@
 					</div>
 				</div>
 			</div>
-
-
 
 			<div class="container"><!-- Author : DAUDEL Adrien -->
 				<div class="row">
@@ -59,10 +57,11 @@
 										}
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">'.$message->emetteur->nom." ".$message->emetteur->prenom.'</h4>';
-											echo '<p class="card-text">'.$message->post->texte.'</p>';
+											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
-										echo '<div class="card-block">';
-											echo '<a href="#" class="card-link">J\'aime</a> <a href="#" class="card-link">Partager</a>';
+										echo '<div class="card-block pull-right">';
+										if($message->aime == "" || $message->aime == null) $message->aime = 0;
+											echo $message->aime.' <a href="#" class="card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
 										echo '</div>';
 									echo '</div>';
 								}
@@ -76,4 +75,30 @@
 				</div>
 			</div>
 		</div>
+</div>
+<script type="text/javascript">
+	$('#postForm').submit(function(e) {
+		e.preventDefault()
+		
+		var message = $('#message').val();
+		var image = $('#image').val();
 
+		if(message != "")
+		{
+			$.ajax({
+				type:'POST',
+				async: true,
+				data: { message, image } ,
+				url:'Afakebook.php?action=postNewMessage',
+				cache: false,
+				success: function(returnData) {
+					// alert(returnData);
+					$('#message').val("");
+					$('#image-text').val("");
+				}
+			})
+		}
+		else
+			alert("Veuillez remplir le champ message");
+	});
+</script>

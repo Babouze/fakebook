@@ -143,16 +143,32 @@ class mainController
 		return context::SUCCESS;
 	}
 
-	public static function postNewMessage($request,$context) {
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function postNewMessage($request,$context)
+	{
+		$image = $_POST['image'];
+		$image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/" + $image;
 
-	  	$post = $_POST['message'];
-	  	// $image = $_POST['image'];
-			$image = null;
+		// check realpath("test.jpg");
+		$image = ""; //TOUTDOUX : supprimer après l'upload
 
-			$idUser = context::getSessionAttribute('id');
-			$newMessage = messageTable::setNewMessage($id,$post,$image);
-			echo $newMessage;
-			//return context::SUCCESS;
-			context::redirect('Afakebook.php?action=accueil');
+		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), $_POST['message'], $image);
+	}
+
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function postNewMessageOnFriend($request,$context)
+	{
+		$image = $_POST['image'];
+		$image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/" + $image;
+
+		// check realpath("test.jpg");
+		$image = ""; //TOUTDOUX : supprimer après l'upload
+
+		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), $_POST['message'], $image, $_POST['destinataire']);
+		var_dump($newMessage);
 	}
 }

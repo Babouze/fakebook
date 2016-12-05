@@ -61,7 +61,10 @@ class messageTable
 		return $listOfMessage;
 	}
 
-	public static function setNewMessage($idUser,$post,$image) {
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function setNewMessage($idUser,$texte,$image) {
 
 			$em = dbconnection::getInstance()->getEntityManager() ;
 
@@ -73,7 +76,7 @@ class messageTable
 			$newMessage = new message;
 			$newPost = new post;
 
-			$newPost->texte = $message;
+			$newPost->texte = $texte;
 			$newPost->image = $image;
 			$newPost->date = new DateTime();
 
@@ -84,6 +87,41 @@ class messageTable
 			$newMessage->emetteur = $utilisateur;
 			$newMessage->parent = $utilisateur;
 			$newMessage->destinataire = $utilisateur;
+			$newMessage->aime = 0;
+
+			$em->persist($newMessage);
+			$em->flush();
+
+			return $newMessage; 
+	}
+
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function setNewMessageOnFriend($idUser,$texte,$image,$idDest) {
+
+			$em = dbconnection::getInstance()->getEntityManager() ;
+
+			$messageRepository = $em->getRepository('message');
+			$utilisateurRepository = $em->getRepository('utilisateur');
+
+		 	$utilisateur = $utilisateurRepository->findOneById($idUser);
+		 	$destinataire = $utilisateurRepository->findOneById($idDest);
+
+			$newMessage = new message;
+			$newPost = new post;
+
+			$newPost->texte = $texte;
+			$newPost->image = $image;
+			$newPost->date = new DateTime();
+
+			$em->persist($newPost);
+			$em->flush();
+
+			$newMessage->post = $newPost;
+			$newMessage->emetteur = $utilisateur;
+			$newMessage->parent = $utilisateur;
+			$newMessage->destinataire = $destinataire;
 			$newMessage->aime = 0;
 
 			$em->persist($newMessage);
