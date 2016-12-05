@@ -1,32 +1,35 @@
 <!-- Auteur : GARAYT Thomas -->
 
-<!--
-<div id="live-chat" style="z-index: 1000;">
+
+<div id="live-chat" style="z-index: 1000;" onclick="createWindow();">
 	<header class="clearfix">
 		<h4>Chat</h4>
-		<span class="hide chat-message-counter">x</span>
+		<span class="hide chat-message-counter"></span>
 	</header>
-	<div class="chat">
-		<div id="chatHistory"  class="chat-history">
-
-		</div>
-		<fieldset class="fieldsetChat">
-			<input id="messageChat" type="text" placeholder="Votre message" autofocus>
-			<input type="hidden">
-		</fieldset>
-	</div>
 </div>
--->
-<input class="btnChat" type="button" onclick="createWindow();" value="Create a window"/>
 
 <script type="text/javascript">
 	function createWindow() {
+		$("#live-chat").css("display","none");
 		$.window({
 			title: "Chat",
 			height: 325,
+			onClose: function(wnd) { // On affiche le bouton en bas
+				closeWindow();
+			},
+			onMinimize: function(wnd) { // On ferme la fenetre si on minimise (et on affiche le bouton en bas)
+				closeWindow();
+				wnd.close();
+			},
 			showFooter: false,
 			content: "<div class='chat'><div id='chatHistory' class='chat-history'></div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
 		});
+	}
+</script>
+
+<script>
+	function closeWindow() {
+		$("#live-chat").css("display","block");
 	}
 </script>
 
@@ -36,15 +39,14 @@
 		// refreshChat("true");
 		$('.chat').hide();
 		$('.chat-message-counter').show();
-		$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
+		// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
 	});
 	
 	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	
-	setInterval('refreshChat("false")', 1000);	
+	setInterval('refreshChat("false")', 2000);	
 		
 	/* Fonction qui va requeter la base de donnée pour rafraichir le chat */
 	function refreshChat(scrollBottom) {
-		console.log(scrollBottom);
 		$.ajax({
 			type:'POST',
 			async: true,
@@ -96,7 +98,7 @@
 
 	(function() {
 		$('#live-chat header').on('click', function() {
-			$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
+			// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
 			$('.chat').slideToggle(300, 'swing');
 			$('.chat-message-counter').fadeToggle(300, 'swing');
 		});

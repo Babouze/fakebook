@@ -101,7 +101,7 @@
 	text-overflow: ellipsis;
 	position: absolute;
 	left: 24px;
-	top: 3px;
+	top: 0px;
 	margin-left: -20px;
 }
 
@@ -119,7 +119,7 @@
 	width: 72px;
 	position: absolute;
 	right: 0;
-	top: 2px;
+	top: 0px;
 	overflow: hidden;
 	white-space: nowrap;
 }
