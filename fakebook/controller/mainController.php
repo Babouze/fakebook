@@ -1,7 +1,7 @@
 <?php
 /*
  * All doc on :
- * Toutes les actions disponibles dans l'application 
+ * Toutes les actions disponibles dans l'application
  *
  */
 
@@ -76,7 +76,7 @@ class mainController
 				}
 				else {
 					$av = "images/default-avatar.png";
-				}	
+				}
 				echo '<li><a title="' . $user->nom . " " . $user->prenom . '" href="fakebook.php?action=profile&id=' . $user->id . '"><img class="img-circle img-raised img-listeamis" src="'.$av.'" alt="Avatar utilisateur" width="16" height="16"> ' . $user->nom . " " . $user->prenom . '</a></li>';
 			}
 		}
@@ -100,8 +100,8 @@ class mainController
 	* Auteur : GARAYT Thomas
 	*/
 	public static function refreshChat($request, $context) {
-		
-		$newChat = chatTable::getChats();	
+
+		$newChat = chatTable::getChats();
 
 		$context->listOfChat = $newChat;
 
@@ -113,37 +113,46 @@ class mainController
 				}
 				else {
 					$av = "images/default-avatar.png";
-				}	
+				}
 
 				echo '<hr>';
 				echo '<div class="chat-message clearfix">';
 				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
-				echo '<h5>' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
+				echo '<h5 class="titleMessageChat">' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
 				echo '<p>' . $chat->post->texte . '</p>';
 				echo '</div>';
-				echo '</div>';	
+				echo '</div>';
 			}
 		}
 
 		return context::SUCCESS;
-    }
+  }
 
 
 	/*
 	* Auteur : GARAYT Thomas
 	*/
-    public static function sendMessage($request,$context) {
-    	$message = $_POST['DATA'];
+	public static function sendMessage($request,$context) {
+		$message = $_POST['DATA'];
 
-    	$idUser = context::getSessionAttribute('id');
+		$idUser = context::getSessionAttribute('id');
 
-		$newChat = chatTable::setNewChat($message,$idUser);	
+		$newChat = chatTable::setNewChat($message,$idUser);
 
 		return context::SUCCESS;
-    }
+	}
 
-    public static function postNewMessage($request,$context) {
-    	return context::SUCCESS;	
-    }
+	public static function postNewMessage($request,$context) {
+
+	  	$post = $_POST['message'];
+	  	// $image = $_POST['image'];
+			$image = null;
+
+			$idUser = context::getSessionAttribute('id');
+			$newMessage = messageTable::setNewMessage($id,$post,$image);
+			echo $newMessage;
+			//return context::SUCCESS;
+			context::redirect('Afakebook.php?action=accueil');
+	}
 }

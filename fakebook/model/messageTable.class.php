@@ -1,7 +1,6 @@
 <?php
 /*
 *
-*
 */
 
 class messageTable
@@ -15,7 +14,7 @@ class messageTable
 		$listOfMessage = array();
 
 		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi l'émetteur
-		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser);	
+		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser);
 		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser);
 
 		foreach($listOfMessageDestinataire as $message) {
@@ -30,9 +29,9 @@ class messageTable
 				}
 			}
 			if($isHere == false) {
-				array_push($listOfMessage,$message);	
+				array_push($listOfMessage,$message);
 			}
-			
+
 		}
 
 		if(!empty($listOfMessage))
@@ -40,7 +39,7 @@ class messageTable
 			$context->message = "Aucun message pour cet utilisateur";
 		}
 
-		return $listOfMessage; 
+		return $listOfMessage;
 	}
 
 	/*
@@ -53,13 +52,44 @@ class messageTable
 		$messageRepository = $em->getRepository('message');
 
 		$listOfMessage = $messageRepository->findAll();
-		
+
 		if(!empty($listOfMessage))
 		{
 			//$context->message = "Aucun message";
 		}
 
-		return $listOfMessage; 
+		return $listOfMessage;
+	}
+
+	public static function setNewMessage($idUser,$post,$image) {
+
+			$em = dbconnection::getInstance()->getEntityManager() ;
+
+			$messageRepository = $em->getRepository('message');
+			$utilisateurRepository = $em->getRepository('utilisateur');
+
+		 	$utilisateur = $utilisateurRepository->findOneById($idUser);
+
+			$newMessage = new message;
+			$newPost = new post;
+
+			$newPost->texte = $message;
+			$newPost->image = $image;
+			$newPost->date = new DateTime();
+
+			$em->persist($newPost);
+			$em->flush();
+
+			$newMessage->post = $newPost;
+			$newMessage->emetteur = $utilisateur;
+			$newMessage->parent = $utilisateur;
+			$newMessage->destinataire = $utilisateur;
+			$newMessage->aime = 0;
+
+			$em->persist($newMessage);
+			$em->flush();
+
+			return $newMessage; 
 	}
 }
 

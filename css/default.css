@@ -2,7 +2,6 @@
 /* CSS Document */
 
 /* Personnal CSS */
-
 .loader {
   height:32px;
 }
@@ -11,8 +10,18 @@
   display:inline;
 }
 
-.fieldsetChat {
+.fieldsetChat{
+  border-top: 2px #0000004d solid;
+}
+
+.fieldsetChat, .fieldsetChat input {
   padding-left:10px;
+  height:40px;
+}
+
+.header-logo {
+  padding-bottom:5px;
+  padding-top:5px;
 }
 
 .card {
@@ -22,7 +31,7 @@
     padding: 10px;
     background-color: #fff;
     border-radius: .25rem;
-    border: 1px solid rgba(0,0,0,.125);	
+    border: 1px solid rgba(0,0,0,.125);
     margin: 20px;
 }
 
@@ -45,13 +54,31 @@
     overflow-x: hidden;
 }
 
+.titleMessageChat {
+  font-size:17px;
+}
+
+html {
+  font-family: "Titillium Web";
+}
+
+.btnChat {
+bottom: 0;
+font-size: 12px;
+right: 24px;
+position: fixed;
+width: 300px;  
+}
+
+
+
 /* Begin - CSS from Codepen.io */
 /* ---------- GENERAL ---------- */
 
 body {
   background: #e9e9e9;
   color: #9a9a9a;
-  font: 100%/1.5em "Droid Sans", sans-serif;
+  font-family: "Titillium Web";
   margin: 0;
 }
 
@@ -88,10 +115,10 @@ img {
 input {
   border: 0;
   color: inherit;
-    font-family: inherit;
-    font-size: 100%;
-    line-height: normal;
-    margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: normal;
+  margin: 0;
 }
 
 p { margin: 0; }
@@ -191,9 +218,10 @@ p { margin: 0; }
 }
 
 .chat-history {
-  height: 252px;
+  /* height: 252px; */
   padding: 8px 24px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow:hidden;
 }
 
 .chat-message {
@@ -215,7 +243,7 @@ p { margin: 0; }
 }
 
 .chat-feedback {
-  font-style: italic; 
+  font-style: italic;
   margin: 0 0 0 80px;
 }
 

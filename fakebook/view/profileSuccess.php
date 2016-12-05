@@ -1,4 +1,5 @@
-<div class="wrapper"><!-- Author : DAUDEL Adrien -->
+<!-- Author : DAUDEL Adrien -->
+<div class="wrapper">
 		<div class="header header-filter" style="background-image: url('images/bg3.jpeg');"></div>
 
 		<div class="main main-raised">
@@ -22,7 +23,7 @@
 						</div>
 						<?php if($_GET['id'] != context::getSessionAttribute('id')) { ?>
 							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-								<form action="Afakebook.php?action=post" method="post" enctype="multipart/form-data">		
+								<form action="Afakebook.php?action=post" method="post" enctype="multipart/form-data">
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Postez un message</label>
 										<input type="text" class="form-control" name="post" />
@@ -38,7 +39,7 @@
 							</div>
 						<?php } else { ?>
 							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-								<form action="Afakebook.php?action=statut" method="post" enctype="multipart/form-data">		
+								<form action="Afakebook.php?action=statut" method="post" enctype="multipart/form-data">
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Modifier votre statut</label>
 										<input type="text" class="form-control" name="post" />

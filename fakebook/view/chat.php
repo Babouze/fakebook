@@ -1,5 +1,6 @@
 <!-- Auteur : GARAYT Thomas -->
 
+<!--
 <div id="live-chat" style="z-index: 1000;">
 	<header class="clearfix">
 		<h4>Chat</h4>
@@ -15,17 +16,27 @@
 		</fieldset>
 	</div>
 </div>
+-->
+<input class="btnChat" type="button" onclick="createWindow();" value="Create a window"/>
+
+<script type="text/javascript">
+	function createWindow() {
+		$.window({
+			title: "Chat",
+			height: 325,
+			showFooter: false,
+			content: "<div class='chat'><div id='chatHistory' class='chat-history'></div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
+		});
+	}
+</script>
 
 <script>
 	$( document ).ready(function() {
-
 		/* On hide le chat, on descend en bas du chat */
 		// refreshChat("true");
 		$('.chat').hide();
 		$('.chat-message-counter').show();
 		$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-
-
 	});
 	
 	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	

@@ -22,10 +22,10 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form action="Afakebook.php?action=postNewMessage" method="post" enctype="multipart/form-data">		
+							<form action="fakebook.php?action=postNewMessage" method="POST" enctype="multipart/form-data">
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
-									<input type="text" class="form-control" name="post" />
+									<input type="text" class="form-control" name="message" />
 									<span class="material-input"></span>
 								</div>
 								<div class="form-group label-floating is-fileinput">
@@ -39,6 +39,8 @@
 					</div>
 				</div>
 			</div>
+
+
 
 			<div class="container"><!-- Author : DAUDEL Adrien -->
 				<div class="row">
@@ -74,3 +76,4 @@
 				</div>
 			</div>
 		</div>
+
