@@ -171,4 +171,21 @@ class mainController
 		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), $_POST['message'], $image, $_POST['destinataire']);
 		var_dump($newMessage);
 	}
+
+	/*
+	* Auteur : GARAYT Thomas
+	*/
+	public static function updateStatut($request,$context) {
+		
+		$statut = $_POST['statut'];
+
+		$idUser = context::getSessionAttribute('id');		
+
+		context::setSessionAttribute('statut', $statut);
+
+		utilisateurTable::updateStatut($idUser,$statut);
+
+		return context::SUCCESS;
+	}
+
 }

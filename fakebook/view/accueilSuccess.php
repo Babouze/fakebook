@@ -56,7 +56,14 @@
 											echo '<img class="card-img-top" src="..." alt="Image du post">';
 										}
 										echo '<div class="card-block">';
-											echo '<h4 class="card-title">'.$message->emetteur->nom." ".$message->emetteur->prenom.'</h4>';
+											echo '<h4 class="card-title">'.$message->emetteur->nom." ".$message->emetteur->prenom;
+											if($message->emetteur->id != $message->destinataire->id) {
+												echo ' à ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo '</h4>';
+											}
+											else {
+												echo '</h4>';
+											}
 											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
