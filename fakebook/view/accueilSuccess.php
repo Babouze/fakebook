@@ -1,6 +1,6 @@
 <!-- Author : DAUDEL Adrien -->
 <div class="wrapper">
-		<div class="header header-filter" style="background-image: url('images/city.jpg'); background-size: cover; background-repeat: no-repeat;"></div>
+		<div class="header header-filter" style="background-image: url('images/bg2.jpeg'); background-size: cover; background-repeat: no-repeat;"></div>
 
 		<div class="main main-raised">
 			<div class="profile-content">

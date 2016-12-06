@@ -23,7 +23,7 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 				<i class="material-icons">menu</i>
 			</button>
-			<a class="navbar-brand" href="fakebook.php">fakebook</a>
+			<a class="navbar-brand" href="fakebook.php"><img src="images/banner.png" width="200px"></a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
