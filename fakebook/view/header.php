@@ -28,8 +28,8 @@
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="fakebook.php?action=accueil">Accueil<span class="sr-only">(current)</span></a></li>
-				<li><a href="fakebook.php?action=profile&id=<?php echo context::getSessionAttribute('id'); ?>">Profil<span class="sr-only"></span></a></li>
+				<li <?php if($_REQUEST['action'] == 'accueil') { ?> class="active" <?php } ?>><a href="fakebook.php?action=accueil">Accueil<span class="sr-only">(current)</span></a></li>
+				<li <?php if($_REQUEST['action'] == 'profile') { ?> class="active" <?php } ?>><a href="fakebook.php?action=profile&id=<?php echo context::getSessionAttribute('id'); ?>">Profil<span class="sr-only"></span></a></li>
 				<li class="dropdown">
 					<a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Amis
 						<b class="caret"></b>
@@ -62,3 +62,4 @@
 		window.location.replace("fakebook.php");
 	}
 </script>
+

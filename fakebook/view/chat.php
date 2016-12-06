@@ -9,6 +9,8 @@
 </div>
 
 <script type="text/javascript">
+	var textChat = "";
+
 	function createWindow() {
 		$("#live-chat").css("display","none");
 		$.window({
@@ -25,9 +27,7 @@
 			content: "<div class='chat'><div id='chatHistory' class='chat-history'></div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
 		});
 	}
-</script>
 
-<script>
 	function closeWindow() {
 		$("#live-chat").css("display","block");
 	}
@@ -57,6 +57,7 @@
 				$('#chatHistory').html(returnData);	
 				if(scrollBottom == 'true') {
 					$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
+					// 
 				}
 				// TODO
 				// Récupérer ladate du dernier chat
@@ -95,15 +96,15 @@
 		}
 	}
 
-
+/*
 	(function() {
 		$('#live-chat header').on('click', function() {
-			// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
+			$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
 			$('.chat').slideToggle(300, 'swing');
 			$('.chat-message-counter').fadeToggle(300, 'swing');
 		});
 	}) ();
-
+*/
 
 
 </script>
