@@ -11,7 +11,7 @@
 				<div class="card card-signup">
 					<form class="form" method="post" action="fakebook.php?action=login" enctype="multipart/form-data">
 						<div class="header-logo header header-primary text-center">
-							<h4>fakebook</h4>
+							<h4><img style="position: relative; left: 12%;" src="images/banner.png" width="80%"></h4>
 						</div>
 						<div class="content">
 
