@@ -18,7 +18,7 @@
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
 								<p><?php echo date_format($context->profile->date_de_naissance, 'd-m-Y'); ?></p>
-								<?php if($context->profile->statut != "") echo '<p>'.$context->profile->statut.'</p>'; ?>
+								<p id="myStatut"> <?php if($context->profile->statut != "") echo $context->profile->statut ; ?></p>
 							</div>
 						</div>
 						<?php if($_GET['id'] != context::getSessionAttribute('id')) { ?>
@@ -40,10 +40,10 @@
 							</div>
 						<?php } else { ?>
 							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-								<form action="Afakebook.php?action=statut" method="post" enctype="multipart/form-data">
+								<form id="updateStatut" method="post" enctype="multipart/form-data">
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Modifier votre statut</label>
-										<input type="text" class="form-control" name="post" />
+										<input id="statut" type="text" class="form-control" name="post" />
 										<span class="material-input"></span>
 									</div>
 									<input class="btn btn-danger" type="submit" name="post" value="Valider">
@@ -70,8 +70,15 @@
 											echo '<img class="card-img-top" src="..." alt="Image du post">';
 										}
 										echo '<div class="card-block">';
-											echo '<h4 class="card-title">'.$message->emetteur->nom." ".$message->emetteur->prenom.'</h4>';
-											echo '<p class="card-text">'.$message->post->texte.'<br/>'.$message->date.'</p>';
+											echo '<h4 class="card-title">' . $message->emetteur->nom . " " . $message->emetteur->prenom;
+											if($message->emetteur->id != $message->destinataire->id) {
+												echo ' à ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo '</h4>';
+											}
+											else {
+												echo '</h4>';
+											}
+											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
 										if($message->aime == "" || $message->aime == null) $message->aime = 0;
@@ -115,5 +122,30 @@
 		}
 		else
 			alert("Veuillez remplir le champ message");
+	});
+</script>
+
+<script type="text/javascript">
+	$('#updateStatut').submit(function(e) {
+		e.preventDefault()
+		
+		var statut = $('#statut').val();
+
+				$('#myStatut').css("animation","");
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { statut } ,
+			url:'Afakebook.php?action=updateStatut',
+			cache: false,
+			success: function(returnData) {
+				$('#myStatut').html(statut);
+				$('#myStatut').css("animation","animUpdate 3s 1");
+				$('#statut').val("");
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
 	});
 </script>

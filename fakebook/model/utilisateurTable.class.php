@@ -53,6 +53,26 @@ class utilisateurTable
 		}
 		return $users; 
 	}
+
+	/*
+	* Auteur : GARAYT Thomas
+	*/
+	public static function updateStatut($idUser,$statut) {
+
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$userRepository = $em->getRepository('utilisateur');
+		$user = $userRepository->findOneById($idUser);	
+		
+		if(!empty($user)) {
+			$user->statut = $statut;
+			$em->persist($user);
+			$em->flush();
+		}
+
+		return $user; 
+	}
+
 }
 
 ?>

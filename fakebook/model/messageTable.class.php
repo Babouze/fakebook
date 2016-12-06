@@ -14,8 +14,8 @@ class messageTable
 		$listOfMessage = array();
 
 		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi l'émetteur
-		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser);
-		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser);
+		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser, array('id' => 'desc'));
+		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser, array('id' => 'desc'));
 
 		foreach($listOfMessageDestinataire as $message) {
 			array_push($listOfMessage,$message);
@@ -51,7 +51,7 @@ class messageTable
 
 		$messageRepository = $em->getRepository('message');
 
-		$listOfMessage = $messageRepository->findAll();
+		$listOfMessage = $messageRepository->findBy(array(), array('id' => 'desc'));
 
 		if(!empty($listOfMessage))
 		{
