@@ -2,16 +2,19 @@
 
 
 <div id="live-chat" style="z-index: 1000;" onclick="createWindow();">
-	<header class="clearfix">
+	<header id="headerLiveChat" class="clearfix">
 		<h4>Chat</h4>
-		<span class="hide chat-message-counter"></span>
+		<span id="chatBubble" class="hidden chat-message-counter">New</span>
 	</header>
 </div>
 
+<div class="hidden" id="chatClose"></div>
+
 <script type="text/javascript">
-	var textChat = "";
+	var idLastChat = 0;
 
 	function createWindow() {
+		content = $("#chatClose").html();
 		$("#live-chat").css("display","none");
 		$.window({
 			title: "Chat",
@@ -26,19 +29,30 @@
 			showFooter: false,
 			content: "<div class='chat'><div id='chatHistory' class='chat-history'></div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
 		});
+
+		$(".window_frame").click(function() {
+			$(".window_title_text").html("Chat");
+			$(".window_title_text").css("color","");
+		});
 	}
 
 	function closeWindow() {
+		$("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
 	}
+
+	function focusOnChat() {
+		alert("Focus");
+	}
+
 </script>
 
 <script>
 	$( document ).ready(function() {
 		/* On hide le chat, on descend en bas du chat */
 		// refreshChat("true");
-		$('.chat').hide();
-		$('.chat-message-counter').show();
+		// $('.chat').hide();
+		// $('.chat-message-counter').show();
 		// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
 	});
 	
@@ -53,15 +67,35 @@
 			url:'Afakebook.php?action=refreshChat',
 			cache: false,
 			success: function(returnData) {
-				// alert(returnData);
-				$('#chatHistory').html(returnData);	
+				$('#chatClose').html("");
+				$('#chatHistory').html(returnData);
+				var valLastId = $("#lastIdChat").val();
+				if(valLastId) { // Le chat est ouvert, on update la fenetre ouverte
+					if(valLastId > idLastChat  && idLastChat != 0) {
+						idLastChat = valLastId;
+						$(".window_title_text").html("New message");
+						$(".window_title_text").css("color","red");
+					}
+					else {
+						idLastChat = valLastId;
+					}
+				}
+				else { // Le chat est fermé, on va update l'icone en bas de l'écran
+					$('#chatClose').html(returnData);
+					valLastId = $("#lastIdChat").val();
+					if(valLastId > idLastChat && idLastChat != 0) {	
+						idLastChat = valLastId;
+						$("#live-chat h4:before").css("background","red");
+						$("#chatBubble").show();
+					}
+					else {
+						idLastChat = valLastId;
+					}
+				}
+
 				if(scrollBottom == 'true') {
 					$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-					// 
 				}
-				// TODO
-				// Récupérer ladate du dernier chat
-				// Ne récupérer que les messages dont la date est supérieure à la date et .append()
 			}
 		})
 	}
@@ -73,7 +107,7 @@
 	    }
 	});
 
-	/* Fonction permet de requeter la base de donnée pour enregister un nouveau message */
+	/* Fonction permettant de requeter la base de donnée pour enregister un nouveau message */
 	function sendMessageChat() {
 
 		// Message to send
@@ -95,16 +129,5 @@
 			})
 		}
 	}
-
-/*
-	(function() {
-		$('#live-chat header').on('click', function() {
-			$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);		
-			$('.chat').slideToggle(300, 'swing');
-			$('.chat-message-counter').fadeToggle(300, 'swing');
-		});
-	}) ();
-*/
-
 
 </script>

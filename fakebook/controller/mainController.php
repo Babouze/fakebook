@@ -123,7 +123,9 @@ class mainController
 				echo '<p>' . $chat->post->texte . '</p>';
 				echo '</div>';
 				echo '</div>';
+				$idChat = $chat->id;
 			}
+			echo "<input class='hidden' id='lastIdChat' value='" . $idChat . "' ></input>";
 		}
 
 		return context::SUCCESS;
