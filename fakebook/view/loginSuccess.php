@@ -39,3 +39,6 @@
 		</div>
 	</div>
 </div>
+
+<div id="world"></div>
+<script src="js/lion.js" type="text/javascript"></script>
