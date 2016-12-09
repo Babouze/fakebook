@@ -15,6 +15,7 @@
 	<script src="js/material.min.js"></script>
 	<script src="js/nouislider.min.js" type="text/javascript"></script>
 	<script src="js/material-kit.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js" type="text/javascript"></script>
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->

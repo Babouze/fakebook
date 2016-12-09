@@ -70,9 +70,12 @@
 											echo '<img class="card-img-top" src="..." alt="Image du post">';
 										}
 										echo '<div class="card-block">';
-											echo '<h4 class="card-title">' . $message->emetteur->nom . " " . $message->emetteur->prenom;
+											echo '<h4 class="card-title">';
+											if($message->emetteur->id != $message->parent->id)
+												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
+											echo $message->emetteur->nom." ".$message->emetteur->prenom;
 											if($message->emetteur->id != $message->destinataire->id) {
-												echo ' à ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 												echo '</h4>';
 											}
 											else {
