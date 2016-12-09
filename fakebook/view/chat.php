@@ -37,8 +37,8 @@
 	}
 
 	function closeWindow() {
-		$("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
+		$("#chatBubble").hide();
 	}
 
 	function focusOnChat() {
@@ -122,7 +122,6 @@
 				async: true,
 				data: { DATA } ,
 				url:'Afakebook.php?action=sendMessage',
-				cache: false,
 				success: function(returnData) {
 					refreshChat("true");
 				}

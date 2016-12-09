@@ -131,7 +131,8 @@
 		
 		var statut = $('#statut').val();
 
-				$('#myStatut').css("animation","");
+		$('#myStatut').css("animation","");
+		
 		$.ajax({
 			type:'POST',
 			async: true,
