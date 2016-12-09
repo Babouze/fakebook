@@ -190,4 +190,13 @@ class mainController
 		return context::SUCCESS;
 	}
 
+	public static function likeMessage($requet,$context) {
+
+		$idMessage = $_POST['idMessage'];
+
+		$messageLike = messageTable::addLike($idMessage);
+
+		return context::SUCCESS;
+	}
+
 }

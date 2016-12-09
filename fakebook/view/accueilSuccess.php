@@ -61,7 +61,7 @@
 												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
 											echo $message->emetteur->nom." ".$message->emetteur->prenom;
 											if($message->emetteur->id != $message->destinataire->id) {
-												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 												echo '</h4>';
 											}
 											else {
@@ -71,7 +71,7 @@
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
 										if($message->aime == "" || $message->aime == null) $message->aime = 0;
-											echo $message->aime.' <a href="#" class="card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
+											echo '<div id="like' . $message->id .  '"> $message->aime.' </div> <a onClick="likeMessage(' . $message->id . ')" class="btnLike card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
 										echo '</div>';
 									echo '</div>';
 								}
@@ -111,4 +111,23 @@
 		else
 			alert("Veuillez remplir le champ message");
 	});
+
+	function likeMessage(idMessage) {
+		alert(idMessage);
+
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=likeMessage',
+			cache: false,
+			success: function(returnData) {
+				alert("Message liké");
+
+				// TODO : update le compteur de like
+
+
+			}
+		})
+	}
 </script>

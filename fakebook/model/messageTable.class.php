@@ -129,6 +129,21 @@ class messageTable
 
 			return $newMessage; 
 	}
+
+	public static function addLike($idMessage) {
+		$em = dbconnection::getInstance()->getEntityManager();
+
+		$messageRepository = $em->getRepository('message');
+
+		$message = $messageRepository->findOneById($idMessage);
+
+		$message->aime = $message->aime + 1;
+
+		$em->persist($message);
+		$em->flush();
+
+		return $message;
+	}
 }
 
 ?>

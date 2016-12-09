@@ -75,7 +75,7 @@
 												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
 											echo $message->emetteur->nom." ".$message->emetteur->prenom;
 											if($message->emetteur->id != $message->destinataire->id) {
-												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 												echo '</h4>';
 											}
 											else {
