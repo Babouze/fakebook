@@ -22,7 +22,7 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form id="postForm" method="POST" enctype="multipart/form-data">
+							<form id="postForm" name="postForm" method="POST" enctype="multipart/form-data">
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
 									<input type="text" class="form-control" id='message' name="message" />
@@ -53,7 +53,7 @@
 									echo '<div class="card">';
 										if(!empty($message->post->image))
 										{
-											echo '<img class="card-img-top" src="..." alt="Image du post">';
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 										}
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
@@ -90,19 +90,24 @@
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
-		var message = $('#message').val();
-		var image = $('#image').val();
+		// var message = $('#message').val();
+		// var data = $('#postForm').serialize();
+		var formData = new FormData(document.getElementById("postForm"));
+		// formData.append('message', $('#message').val());
+		// formData.append('image', $('#image').files[0]);
 
 		if(message != "")
 		{
 			$.ajax({
 				type:'POST',
 				async: true,
-				data: { message, image } ,
+				data: formData,
 				url:'Afakebook.php?action=postNewMessage',
 				cache: false,
+				processData: false,  // indique à jQuery de ne pas traiter les données
+				contentType: false,   // indique à jQuery de ne pas configurer le contentType
 				success: function(returnData) {
-					// alert(returnData);
+					alert(returnData);
 					$('#message').val("");
 					$('#image-text').val("");
 				}
