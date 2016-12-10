@@ -58,9 +58,9 @@
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id)
-												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
-											echo $message->emetteur->nom." ".$message->emetteur->prenom;
-											if($message->emetteur->id != $message->destinataire->id) {
+												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+											echo $message->parent->nom." ".$message->parent->prenom;
+											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 												echo '</h4>';
 											}
@@ -70,8 +70,8 @@
 											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
-										if($message->aime == "" || $message->aime == null) $message->aime = 0;
-											echo $message->aime.' <a href="#" class="card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
+											if($message->aime == "" || $message->aime == null) $message->aime = 0;
+											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
 										echo '</div>';
 									echo '</div>';
 								}
@@ -111,4 +111,42 @@
 		else
 			alert("Veuillez remplir le champ message");
 	});
+</script>
+
+<script type="text/javascript">
+	function jaime(idMessage) {
+		$('#aime' + idMessage).css("animation","");
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=jaime',
+			cache: false,
+			success: function(returnData) {
+				$('#aime' + idMessage).html(returnData);
+				$('#aime' + idMessage).css("animation","animUpdate 1s 1");
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
+	};
+</script>
+
+<script type="text/javascript">
+	function partage(idMessage) {
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=partage',
+			cache: false,
+			success: function(returnData) {
+				// alert(returnData);
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
+	};
 </script>

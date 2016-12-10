@@ -190,4 +190,19 @@ class mainController
 		return context::SUCCESS;
 	}
 
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function jaime($request,$context)
+	{
+		echo messageTable::jaime($_POST['idMessage']);
+	}
+
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function partage($request,$context)
+	{
+		messageTable::partage($_POST['idMessage']);
+	}
 }

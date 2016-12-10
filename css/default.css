@@ -40,17 +40,6 @@
   padding-top:5px;
 }
 
-.card {
-    position: relative;
-    display: block;
-    margin-bottom: .75rem;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: .25rem;
-    border: 1px solid rgba(0,0,0,.125);
-    margin: 20px;
-}
-
 #login-wrapper
 {
   position: relative;

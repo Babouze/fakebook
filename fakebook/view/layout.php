@@ -7,11 +7,11 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/default.css">
 
-	<script type="text/javascript" src="js/chat.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.0.0.js"></script> -->
 	<script src="https://code.jquery.com/jquery-migrate-1.1.1.js"></script>
 
+	<script type="text/javascript" src="js/chat.js"></script>
 	<script src="js/material.min.js"></script>
 	<script src="js/nouislider.min.js" type="text/javascript"></script>
 	<script src="js/material-kit.js" type="text/javascript"></script>

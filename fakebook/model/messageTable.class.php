@@ -13,15 +13,15 @@ class messageTable
 
 		$listOfMessage = array();
 
-		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi l'émetteur
+		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi le parent
 		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser, array('id' => 'desc'));
-		$listOfMessageEmetteur = $messageRepository->findByEmetteur($idUser, array('id' => 'desc'));
+		$listOfMessageParent = $messageRepository->findByParent($idUser, array('id' => 'desc'));
 
 		foreach($listOfMessageDestinataire as $message) {
 			array_push($listOfMessage,$message);
 		}
 
-		foreach($listOfMessageEmetteur as $message) {
+		foreach($listOfMessageParent as $message) {
 			$isHere = false;
 			foreach($listOfMessage as $messageInArray) {
 				if($messageInArray->id == $message->id) {
@@ -31,7 +31,6 @@ class messageTable
 			if($isHere == false) {
 				array_push($listOfMessage,$message);
 			}
-
 		}
 
 		if(!empty($listOfMessage))
@@ -128,6 +127,53 @@ class messageTable
 			$em->flush();
 
 			return $newMessage; 
+	}
+
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function jaime($idMessage)
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$messageRepository = $em->getRepository('message');
+
+		$message = $messageRepository->findOneById($idMessage);
+
+		$message->aime++;
+
+		$aime = $message->aime;
+
+		$em->persist($message);
+		$em->flush();
+
+		return $aime;
+	}
+
+	/*
+	 * Author : DAUDEL Adrien
+	 */
+	public static function partage($idMessage)
+	{
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$messageRepository = $em->getRepository('message');
+		$utilisateurRepository = $em->getRepository('utilisateur');
+
+		$message = $messageRepository->findOneById($idMessage);
+		$emetteur = $utilisateurRepository->findOneById(context::getSessionAttribute('id'));
+
+		$newMessage = new message;
+		$newMessage->post = $message->post;
+		$newMessage->parent = $message->parent;
+		$newMessage->destinataire = $message->destinataire;
+		$newMessage->aime = 0;
+		$newMessage->emetteur = $emetteur;
+
+		$em->persist($newMessage);
+		$em->flush();
+
+		return $newMessage;
 	}
 }
 
