@@ -1,16 +1,19 @@
 <script type="text/javascript">
 	$('body').css('background-image', 'url(\'images/bg.jpg\')');
-	$('body').css('background-size', 'cover');
+	$('body').css('background-size', 'length 100%');
 	$('body').css('background-repeat', 'no-repeat');
 </script>
 
 <div class="wrapper" id="login-wrapper">
 	<div class="container">
+		<div class="row hidden-sm hidden-xs">
+			<div id="lion"></div>
+		</div>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 				<div class="card card-signup">
 					<form class="form" method="post" action="fakebook.php?action=login" enctype="multipart/form-data">
-						<div class="header-logo header header-primary text-center">
+						<div class="header-logo header header-primary text-center" id="headerLogo">
 							<h4><img style="position: relative; left: 12%;" src="images/banner.png" width="80%"></h4>
 						</div>
 						<div class="content">
@@ -39,6 +42,4 @@
 		</div>
 	</div>
 </div>
-
-<div id="world"></div>
 <script src="js/lion.js" type="text/javascript"></script>
