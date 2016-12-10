@@ -37,7 +37,7 @@
 	}
 
 	function closeWindow() {
-		$("#live-chat h4").css("background","#1a8a34");
+		// $("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
 	}
 
@@ -92,10 +92,8 @@
 						idLastChat = valLastId;
 					}
 				}
-
-				if(scrollBottom == 'true') {
-					$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-				}
+				
+				$('.window_frame').scrollTop(99999999);
 			}
 		})
 	}

@@ -9,7 +9,7 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
+								echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 							}
 							else
 							{
