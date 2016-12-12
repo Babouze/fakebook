@@ -106,11 +106,7 @@
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
-		// var message = $('#message').val();
-		// var data = $('#postForm').serialize();
 		var formData = new FormData(document.getElementById("postForm"));
-		// formData.append('message', $('#message').val());
-		// formData.append('image', $('#image').files[0]);
 
 		if(message != "")
 		{
