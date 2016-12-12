@@ -37,8 +37,10 @@
 	}
 
 	function closeWindow() {
+
 		// $("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
+		$("#chatBubble").hide();
 	}
 
 	function focusOnChat() {
@@ -48,14 +50,9 @@
 </script>
 
 <script>
-	$( document ).ready(function() {
-		/* On hide le chat, on descend en bas du chat */
-		// refreshChat("true");
-		// $('.chat').hide();
-		// $('.chat-message-counter').show();
-		// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-	});
 	
+	var isFirstRefresh = true;
+
 	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	
 	setInterval('refreshChat("false")', 2000);	
 		
@@ -93,7 +90,10 @@
 					}
 				}
 				
-				$('.window_frame').scrollTop(99999999);
+				if(scrollBottom == "true" || isFirstRefresh == true) {
+					isFirstRefresh = false;
+					$('.window_frame').scrollTop(99999999);	
+				}				
 			}
 		})
 	}
@@ -120,7 +120,6 @@
 				async: true,
 				data: { DATA } ,
 				url:'Afakebook.php?action=sendMessage',
-				cache: false,
 				success: function(returnData) {
 					refreshChat("true");
 				}

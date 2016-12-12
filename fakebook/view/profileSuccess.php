@@ -72,10 +72,17 @@
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id)
+<<<<<<< HEAD
+												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
+											echo $message->emetteur->nom." ".$message->emetteur->prenom;
+											if($message->emetteur->id != $message->destinataire->id) {
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+=======
 												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
 											echo $message->parent->nom." ".$message->parent->prenom;
 											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+>>>>>>> d932e030e4231a9e59e1e154b9797eb39f2f2bf2
 												echo '</h4>';
 											}
 											else {
@@ -134,7 +141,8 @@
 		
 		var statut = $('#statut').val();
 
-				$('#myStatut').css("animation","");
+		$('#myStatut').css("animation","");
+		
 		$.ajax({
 			type:'POST',
 			async: true,

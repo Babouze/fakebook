@@ -74,7 +74,8 @@
 												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
 											echo $message->parent->nom." ".$message->parent->prenom;
 											if($message->parent->id != $message->destinataire->id) {
-												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+
 												echo '</h4>';
 											}
 											else {
@@ -83,8 +84,10 @@
 											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
+
 											if($message->aime == "" || $message->aime == null) $message->aime = 0;
 											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
+
 										echo '</div>';
 									echo '</div>';
 								}

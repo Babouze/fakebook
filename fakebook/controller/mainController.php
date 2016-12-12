@@ -212,4 +212,5 @@ class mainController
 	{
 		messageTable::partage($_POST['idMessage']);
 	}
+
 }
