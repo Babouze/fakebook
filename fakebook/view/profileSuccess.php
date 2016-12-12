@@ -18,7 +18,7 @@
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
 								<p><?php echo date_format($context->profile->date_de_naissance, 'd-m-Y'); ?></p>
-								<p id="myStatut"> <?php if($context->profile->statut != "") echo htmlspecialchars($context->profile->statut); ?></p>
+								<p id="myStatut"> <?php if($context->profile->statut != "") echo htmlspecialchars($context->profile->statut,ENT_NOQUOTES); ?></p>
 							</div>
 						</div>
 						<?php if($_GET['id'] != context::getSessionAttribute('id')) { ?>
