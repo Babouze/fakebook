@@ -75,7 +75,7 @@ class mainController
 					$av = $user->avatar;
 				}
 				else {
-					$av = "images/default-avatar.png";
+					$av = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar.png";
 				}
 				echo '<li><a title="' . $user->nom . " " . $user->prenom . '" href="fakebook.php?action=profile&id=' . $user->id . '"><img class="img-circle img-raised img-listeamis" src="'.$av.'" alt="Avatar utilisateur" width="16" height="16"> ' . $user->nom . " " . $user->prenom . '</a></li>';
 			}
@@ -112,7 +112,7 @@ class mainController
 					$av = $chat->emetteur->avatar;
 				}
 				else {
-					$av = "images/default-avatar.png";
+					$av = 'https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar.png';
 				}
 
 				echo '<hr>';
@@ -120,7 +120,7 @@ class mainController
 				echo '<img src="' . $av . '" alt="Avatar utilisateur" width="32" height="32">';
 				echo '<div class="chat-message-content clearfix">';
 				echo '<h5 class="titleMessageChat">' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
-				echo '<p>' . $chat->post->texte . '</p>';
+				echo '<p>' . htmlspecialchars($chat->post->texte,ENT_HTML5) . '</p>';
 				echo '</div>';
 				echo '</div>';
 				$idChat = $chat->id;
