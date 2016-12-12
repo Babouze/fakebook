@@ -175,6 +175,7 @@ class messageTable
 
 		return $newMessage;
 	}
+
 }
 
 ?>

@@ -25,7 +25,7 @@
 							<form id="postForm" name="postForm" method="POST" enctype="multipart/form-data">
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
-									<input type="text" class="form-control" id='message' name="message" />
+									<textarea type="text" class="form-control" id='message' name="message" /></textarea>
 									<span class="material-input"></span>
 								</div>
 								<div class="form-group label-floating is-fileinput">
@@ -82,7 +82,7 @@
 												echo '</h4>';
 											}
 
-											echo '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+											echo '<p class="card-text">' . nl2br(htmlspecialchars($message->post->texte,ENT_NOQUOTES)) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
 

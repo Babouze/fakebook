@@ -13,6 +13,7 @@
 <script type="text/javascript">
 
 	var idLastChat = 0;
+	var isFirstRefresh = "true";
 
 	var windowHeight = 400;
 	var windowWidth = $('#live-chat').width();
@@ -52,16 +53,10 @@
 	}
 
 	function closeWindow() {
-		isFirstRefresh = "false";
+		isFirstRefresh = "true";
 		$("#live-chat").css("display","block");
 		$("#chatBubble").hide();
 	}
-
-	function focusOnChat() {
-		alert("Focus");
-	}
-	
-	var isFirstRefresh = true;
 
 	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	
 	setInterval('refreshChat("false")', 2000);	
@@ -100,8 +95,8 @@
 					}
 				}
 				
-				if(scrollBottom == "true" || isFirstRefresh == true) {
-					isFirstRefresh = false;
+				if(scrollBottom == "true" || isFirstRefresh == "true") {
+					isFirstRefresh = "false";
 					$('.window_frame').scrollTop(99999999);	
 				}				
 			}
