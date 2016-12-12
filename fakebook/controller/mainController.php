@@ -163,7 +163,7 @@ class mainController
 		if(!$resultat) $image="";
 		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
 
-		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), $_POST['message'], $image);
+		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), nl2br($_POST['message']), $image);
 		//TODO: append du new message à faire
 	}
 
@@ -185,7 +185,7 @@ class mainController
 		if(!$resultat) $image="";
 		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
 
-		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), $_POST['message'], $image, $_POST['destinataire']);
+		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), nl2br($_POST['message']), $image, $_POST['destinataire']);
 		var_dump($newMessage);
 		//TODO: append du new message à faire
 	}

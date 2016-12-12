@@ -9,11 +9,11 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
+								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
 							}
 							else
 							{
-								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar">';
+								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar">';
 							} ?>
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
