@@ -12,13 +12,15 @@
 <!-- Auteur : GARAYT Thomas -->
 <script type="text/javascript">
 	var idLastChat = 0;
-
+	var windowX = window.innerWidth - ($('#live-chat').width() - 70);
 	function createWindow() {
 		content = $("#chatClose").html();
 		$("#live-chat").css("display","none");
 		$.window({
 			title: "Chat",
 			height: 325,
+			x:windowX,
+			y:180,
 			onClose: function(wnd) { // On affiche le bouton en bas
 				closeWindow();
 			},
