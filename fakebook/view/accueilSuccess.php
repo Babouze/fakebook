@@ -57,7 +57,7 @@
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
 					</div>
-					<div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+					<div class="col-lg-10 col-md-10 col-xs-10 col-sm-10" id="listOfMessages">
 						<?php
 							if($context->listOfMessages)
 							{
@@ -178,4 +178,33 @@
 			}
 		})
 	};
+</script>
+
+<!-- Auteur : DAUDEL Adrien -->
+<script type="text/javascript">
+	setInterval('refreshMessages()', 2000);
+
+	var lastId = 0;
+	var id = $('#destinataire').val();
+
+	function refreshMessages() {
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: id,
+			url:'Afakebook.php?action=refreshMessages',
+			cache: false,
+			success: function(returnData) {
+				if($('#lastIdMessage').val() > lastId  && lastId != 0) {
+					lastId = $('#lastIdMessage').val();
+					toastr["error"]("Nouveaux posts");
+				}
+				else {
+					lastId = $('#lastIdMessage').val();
+					toastr["error"](lastId);
+				}
+				$('#listOfMessages').html(returnData);
+			}
+		})
+	}
 </script>

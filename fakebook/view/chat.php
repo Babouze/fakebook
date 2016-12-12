@@ -52,7 +52,7 @@
 	}
 
 	function closeWindow() {
-		isFirstRefresh = "false";
+		isFirstRefresh = "true";
 		$("#live-chat").css("display","block");
 		$("#chatBubble").hide();
 	}

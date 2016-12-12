@@ -222,4 +222,57 @@ class mainController
 		messageTable::partage($_POST['idMessage']);
 	}
 
+	/*
+	 * Auteur : DAUDEL Adrien
+	 */
+	public static function refreshMessages($request, $context)
+	{
+		if(!empty($_POST['id']))
+			$context->listOfMessages = messageTable::getMessageByUser($_POST['id']);
+		else
+			$context->listOfMessages = messageTable::getMessages();
+
+		//TODO: Mettre un booléen qui dit qu'on veut juste savoir si il y a de nouveaux posts et envoyer un booléen en réponse à true s'il y a de nouveaux messages. Si le booléen envoyé en ajax est à true (sur le onclick), alors envoyer le code entier
+
+		if($context->listOfMessages)
+		{
+			foreach($context->listOfMessages as $message)
+			{
+				if(!isset($idMessage) && $message->id != "100") $idMessage = $message->id;
+				echo '<div class="card">';
+					if(!empty($message->post->image))
+					{
+						echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+					}
+					echo '<div class="card-block">';
+						echo '<h4 class="card-title">';
+						if($message->emetteur->id != $message->parent->id)
+							echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+						echo $message->parent->nom." ".$message->parent->prenom;
+						if($message->parent->id != $message->destinataire->id) {
+							echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+
+							echo '</h4>';
+						}
+						else {
+							echo '</h4>';
+						}
+
+						echo '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+					echo '</div>';
+					echo '<div class="card-block pull-right">';
+
+						if($message->aime == "" || $message->aime == null) $message->aime = 0;
+						echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
+
+					echo '</div>';
+				echo '</div>';
+			}
+		}
+		else
+		{
+			echo '<div class="card">Aucun message !</div>';
+		}
+		echo "<input class='hidden' id='lastIdMessage' value='".$idMessage."'></input>";
+	}
 }
