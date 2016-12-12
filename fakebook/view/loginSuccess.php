@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$('body').css('background-image', 'url(\'images/bg.jpg\')');
 	$('body').css('background-size', 'length 100%');
-	$('body').css('background-repeat', 'no-repeat');
+	$('body').css('background-repeat', 'round');
 </script>
 
 <div class="wrapper" id="login-wrapper">

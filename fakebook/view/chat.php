@@ -13,15 +13,21 @@
 <script type="text/javascript">
 
 	var idLastChat = 0;
-	var windowX = window.innerWidth - ($('#live-chat').width() - 70);
+
+	var windowHeight = 400;
+	var windowWidth = $('#live-chat').width();
+	var windowX = $('body').width() - ($('#live-chat').width() + 40);
+	var windowY = document.getElementById('live-chat').getBoundingClientRect().top - windowHeight + 35;
+	window.addEventListener('resize', onWindowResize, false);
+
 	function createWindow() {
-		content = $("#chatClose").html();
 		$("#live-chat").css("display","none");
 		$.window({
 			title: "Chat",
-			height: 325,
+			height: windowHeight,
+			width: windowWidth,
 			x:windowX,
-			y:180,
+			y:windowY,
 			onClose: function(wnd) { // On affiche le bouton en bas
 				closeWindow();
 			},
@@ -30,18 +36,23 @@
 				wnd.close();
 			},
 			showFooter: false,
-			content: "<div class='chat'><div id='chatHistory' class='chat-history'></div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
+			content: "<div class='chat'><div id='chatHistory' class='chat-history'>" + $("#chatClose").html() + "</div><fieldset class='fieldsetChat'><input id='messageChat' type='text' placeholder='Votre message' autofocus><input type='hidden'></fieldset></div>"
 		});
-
+		
 		$(".window_frame").click(function() {
 			$(".window_title_text").html("Chat");
 			$(".window_title_text").css("color","");
 		});
 	}
 
+	function onWindowResize() {
+		windowWidth = $('#live-chat').width();
+		windowX = $('body').width() - ($('#live-chat').width() + 40);
+		windowY = document.getElementById('live-chat').getBoundingClientRect().top - windowHeight + 35;
+	}
+
 	function closeWindow() {
 		isFirstRefresh = "false";
-		// $("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
 		$("#chatBubble").hide();
 	}
