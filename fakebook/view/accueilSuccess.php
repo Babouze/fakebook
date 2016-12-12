@@ -120,7 +120,7 @@
 				processData: false,  // indique à jQuery de ne pas traiter les données
 				contentType: false,   // indique à jQuery de ne pas configurer le contentType
 				success: function(returnData) {
-					alert(returnData);
+					//alert(returnData);
 					$('#message').val("");
 					$('#image-text').val("");
 				}
