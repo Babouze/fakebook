@@ -9,7 +9,7 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
 							}
 							else
 							{
@@ -67,22 +67,15 @@
 									echo '<div class="card">';
 										if(!empty($message->post->image))
 										{
-											echo '<img class="card-img-top" src="..." alt="Image du post">';
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 										}
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id)
-<<<<<<< HEAD
-												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
-											echo $message->emetteur->nom." ".$message->emetteur->prenom;
-											if($message->emetteur->id != $message->destinataire->id) {
-												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
-=======
 												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
 											echo $message->parent->nom." ".$message->parent->prenom;
 											if($message->parent->id != $message->destinataire->id) {
-												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
->>>>>>> d932e030e4231a9e59e1e154b9797eb39f2f2bf2
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 												echo '</h4>';
 											}
 											else {
