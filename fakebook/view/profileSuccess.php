@@ -108,6 +108,8 @@
 		
 		var formData = new FormData(document.getElementById("postForm"));
 
+		var message = $("#message").val();
+
 		if(message != "")
 		{
 			$.ajax({
@@ -119,14 +121,18 @@
 				processData: false,  // indique à jQuery de ne pas traiter les données
 				contentType: false,   // indique à jQuery de ne pas configurer le contentType
 				success: function(returnData) {
-					alert(returnData);
+					toastr["success"]("Message posté");	
 					$('#message').val("");
 					$('#image-text').val("");
+				},
+				error: function(returnData) {
+					toastr["error"]("Erreur lors de l'envoi du message");	
 				}
 			})
 		}
-		else
-			alert("Veuillez remplir le champ message");
+		else {
+			toastr["warning"]("Veuillez remplir le champ message");	
+		}
 	});
 </script>
 
@@ -149,9 +155,10 @@
 				$('#myStatut').html(statut);
 				$('#myStatut').css("animation","animUpdate 1s 1");
 				$('#statut').val("");
+				toastr["success"]("Statut mis à jour");	
 			},
 			error: function(returnData) {
-				alert("Erreur");
+				toastr["error"]("Erreur lors de la mise à jour du statut");	
 			}
 		})
 	});
@@ -170,9 +177,10 @@
 			success: function(returnData) {
 				$('#aime' + idMessage).html(returnData);
 				$('#aime' + idMessage).css("animation","animUpdate 3s 1");
+				toastr["success"]("Like ajouté !");
 			},
 			error: function(returnData) {
-				alert("Erreur");
+				toastr["error"]("Erreur lors du like");
 			}
 		})
 	};
@@ -188,10 +196,10 @@
 			url:'Afakebook.php?action=partage',
 			cache: false,
 			success: function(returnData) {
-				// alert(returnData);
+				toastr["success"]("Message partagé !");
 			},
 			error: function(returnData) {
-				alert("Erreur");
+				toastr["error"]("Erreur lors du partage");
 			}
 		})
 	};
