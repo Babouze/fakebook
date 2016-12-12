@@ -15,6 +15,10 @@
     }
 }
 
+.imgProfile:hover {
+  cursor:pointer;
+}
+
 #toast-container {
   top:80px;
 }
