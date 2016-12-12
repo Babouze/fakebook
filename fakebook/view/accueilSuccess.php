@@ -53,7 +53,7 @@
 				</div>
 			</div>
 
-			<div class="container"><!-- Author : DAUDEL Adrien -->
+			<div class="container"><!-- Auteur : DAUDEL Adrien -->
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
 					</div>
@@ -102,6 +102,8 @@
 			</div>
 		</div>
 </div>
+
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
@@ -130,6 +132,7 @@
 	});
 </script>
 
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	function jaime(idMessage) {
 		$('#aime' + idMessage).css("animation","");
@@ -150,6 +153,7 @@
 	};
 </script>
 
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	function partage(idMessage) {
 		$.ajax({

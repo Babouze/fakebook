@@ -1,8 +1,7 @@
 <!-- Auteur : GARAYT Thomas -->
 
-
 <div id="live-chat" style="z-index: 1000;" onclick="createWindow();">
-	<header id="headerLiveChat" class="clearfix">
+	<header id="headerLiveChat" class="clearfix hidden-xs">
 		<h4>Chat</h4>
 		<span id="chatBubble" class="hidden chat-message-counter">New</span>
 	</header>
@@ -10,6 +9,7 @@
 
 <div class="hidden" id="chatClose"></div>
 
+<!-- Auteur : GARAYT Thomas -->
 <script type="text/javascript">
 	var idLastChat = 0;
 
@@ -46,10 +46,6 @@
 	function focusOnChat() {
 		alert("Focus");
 	}
-
-</script>
-
-<script>
 	
 	var isFirstRefresh = true;
 

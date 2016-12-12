@@ -6,6 +6,9 @@
 
 class utilisateurTable
 {
+	/*
+	 * Auteur : DAUDEL Adrien
+	 */
 	public static function getUserByLoginAndPass($login,$pass)
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;
@@ -21,7 +24,7 @@ class utilisateurTable
 	}
 
 	/*
-	 * author : DAUDEL Adrien
+	 * Auteur : DAUDEL Adrien
 	 */
 	public static function getUserById($idUser)
 	{
@@ -38,7 +41,7 @@ class utilisateurTable
 	}
 
 	/*
-	 * author : DAUDEL Adrien
+	 * Auteur : DAUDEL Adrien
 	 */
 	public static function getUsers()
 	{
@@ -72,7 +75,6 @@ class utilisateurTable
 
 		return $user; 
 	}
-
 }
 
 ?>

@@ -7,20 +7,11 @@
 class chatTable
 {
 	/*
-	 * author : GARAYT Thomas
+	 * Auteur : GARAYT Thomas
 	 */
 	public static function getLastChat()
 	{
-		$em = dbconnection::getInstance()->getEntityManager() ;
-
-		// $qb = $em->createQueryBuilder();
-		// $qb->select('c')
-		// 	->from('chat', 'c')
-		// 	->innerjoin('post.id', 'c', Join::ON, 'c.post = post.id')
-		// 	->orderby('post.date', 'desc')
-		// 	->setMaxResults('1');
-
-		// $chat = $qb->getQuery()->getResult();
+		$em = dbconnection::getInstance()->getEntityManager();
 
 		$chatRepository = $em->getRepository('chat');
 		$chat = $chatRepository->findBy(array(), array('id' => 'desc'), 1);	
@@ -33,7 +24,7 @@ class chatTable
 	}
 
 	/*
-	 * author : GARAYT Thomas
+	 * Auteur : GARAYT Thomas
 	 */
 	public static function getChats()
 	{
@@ -50,7 +41,7 @@ class chatTable
 	}
 
 	/*
-	 * author : GARAYT Thomas
+	 * Auteur : GARAYT Thomas
 	 */
 	public static function setNewChat($message,$idUser)
 	{
@@ -70,8 +61,6 @@ class chatTable
 		$em->persist($newPost);
 		$em->flush();
 
-		// $idPost = $newPost->id;
-
 		$newChat->post = $newPost;
 		$newChat->emetteur =  $utilisateur;
 
@@ -80,14 +69,6 @@ class chatTable
 
 		return $newChat; 
 	}
-
-
-	public static function flushEntity($entity) {
-		$em = dbconnection::getInstance()->getEntityManager();
-		$em->persist($entity);
-		$em->flush();
-	}
-
 }
 
 ?>

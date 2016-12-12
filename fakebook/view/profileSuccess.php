@@ -23,23 +23,23 @@
 						</div>
 						<?php if($_GET['id'] != context::getSessionAttribute('id')) { ?>
 							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-								<form id="postForm" method="post" enctype="multipart/form-data">
-									<div class="form-group label-floating is-empty">
-										<label for="post" class="control-label">Postez un message</label>
-										<input type="text" id="message" class="form-control" name="post" />
-										<span class="material-input"></span>
-										<input type="hidden" id="idDest" value="<?php echo $_GET['id']; ?>" />
-									</div>
-									<div class="form-group label-floating is-fileinput">
-										<!-- <label class="control-label" for="image">Ajouter une image</label> -->
-										<input type="file" id="image" name="image" accept="image/*" />
-										<input type="text" id="image-text" readonly class="form-control" placeholder="Ajouter une image..">
-									</div>
-									<input class="btn btn-danger" type="submit" name="post" value="Poster">
-								</form>
+								<form id="postForm" name="postForm" method="POST" enctype="multipart/form-data">
+								<div class="form-group label-floating is-empty">
+									<label for="post" class="control-label">Postez un message</label>
+									<input type="text" class="form-control" id='message' name="message" />
+									<input type="hidden" name="destinataire" value="<?php echo $_GET['id']; ?>" />
+									<span class="material-input"></span>
+								</div>
+								<div class="form-group label-floating is-fileinput">
+									<!-- <label class="control-label" for="image">Ajouter une image</label> -->
+									<input type="file" id='image' name="image" accept="image/*" />
+									<input type="text" id="image-text" readonly class="form-control" placeholder="Ajouter une image..">
+								</div>
+								<input class="btn btn-danger" type="submit" name="post" value="Poster">
+							</form>
 							</div>
 						<?php } else { ?>
-							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12"><!-- Auteur : GARAYT Thomas -->
 								<form id="updateStatut" method="post" enctype="multipart/form-data">
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Modifier votre statut</label>
@@ -100,24 +100,26 @@
 			</div>
 		</div>
 </div>
+
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
-		var message = $('#message').val();
-		var image = $('#image').val();
-		var destinataire = $('#idDest').val();
+		var formData = new FormData(document.getElementById("postForm"));
 
 		if(message != "")
 		{
 			$.ajax({
 				type:'POST',
 				async: true,
-				data: { message, image, destinataire } ,
+				data: formData,
 				url:'Afakebook.php?action=postNewMessageOnFriend',
 				cache: false,
+				processData: false,  // indique à jQuery de ne pas traiter les données
+				contentType: false,   // indique à jQuery de ne pas configurer le contentType
 				success: function(returnData) {
-					// alert(returnData);
+					alert(returnData);
 					$('#message').val("");
 					$('#image-text').val("");
 				}
@@ -128,6 +130,7 @@
 	});
 </script>
 
+<!-- Auteur : GARAYT Thomas -->
 <script type="text/javascript">
 	$('#updateStatut').submit(function(e) {
 		e.preventDefault()
@@ -144,7 +147,7 @@
 			cache: false,
 			success: function(returnData) {
 				$('#myStatut').html(statut);
-				$('#myStatut').css("animation","animUpdate 3s 1");
+				$('#myStatut').css("animation","animUpdate 1s 1");
 				$('#statut').val("");
 			},
 			error: function(returnData) {
@@ -154,6 +157,7 @@
 	});
 </script>
 
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	function jaime(idMessage) {
 		$('#aime' + idMessage).css("animation","");
@@ -174,6 +178,7 @@
 	};
 </script>
 
+<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
 	function partage(idMessage) {
 		$.ajax({
