@@ -32,6 +32,11 @@
 	<!-- <script type="text/javascript" src="js/jquery/jquery-ui.js"></script> -->
 	<script type="text/javascript" src="js/jquery/window/jquery.window.js"></script>
 
+	<!-- Toastr pour les notifications -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    
+    
 </head>
 <body style="background-color: #191919;">
 	<?php

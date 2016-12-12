@@ -11,6 +11,7 @@
 
 <!-- Auteur : GARAYT Thomas -->
 <script type="text/javascript">
+
 	var idLastChat = 0;
 
 	function createWindow() {
@@ -37,7 +38,7 @@
 	}
 
 	function closeWindow() {
-
+		isFirstRefresh = "false";
 		// $("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
 		$("#chatBubble").hide();
@@ -118,7 +119,11 @@
 				url:'Afakebook.php?action=sendMessage',
 				success: function(returnData) {
 					refreshChat("true");
-				}
+					toastr["success"]("Message envoyé");	
+				},
+				error: function(returnData) {
+					toastr["error"]("Erreur lors de l'envoi du message");	
+				} 
 			})
 		}
 	}

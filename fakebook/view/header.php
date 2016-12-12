@@ -8,10 +8,7 @@
 			url:'Afakebook.php?action=friends',
 			cache: false,
 			success: function(returnData) {
-				// alert(returnData);
 				$("#friends").append(returnData);
-				// récupérer les nouveaux messages et non pas tous les messages
-				// afficher seulement les nouveaux messages
 			}
 		})
 	}
@@ -56,6 +53,10 @@
 			url:'Afakebook.php?action=logout',
 			cache:'false',
 			succces: function(returnHtml) {
+				toastr["success"]("Déconnecté");	
+			},
+			error: function(returnHtml) {
+				toastr["error"]("Erreur lors de la deconnexion");	
 			}
 		})
 		window.location.replace("fakebook.php");
