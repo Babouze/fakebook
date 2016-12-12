@@ -31,9 +31,10 @@ var HEIGHT,
 //INIT THREE JS, SCREEN AND MOUSE EVENTS
 
 function init(){
+  $('#lion').css('left', document.getElementById('headerLogo').getBoundingClientRect().left-document.getElementById('headerLogo').getBoundingClientRect().width/2);
   scene = new THREE.Scene();
-  HEIGHT = window.innerHeight / 2; //TODO: modifier la taille ici
-  WIDTH = window.innerWidth / 2; //TODO: modifier la taille ici
+  HEIGHT = 400; //TODO: modifier la taille ici
+  WIDTH = document.getElementById('headerLogo').getBoundingClientRect().width* 2; //TODO: modifier la taille ici
   aspectRatio = WIDTH / HEIGHT;
   fieldOfView = 60;
   nearPlane = 1;
@@ -49,7 +50,7 @@ function init(){
   renderer = new THREE.WebGLRenderer({alpha: true, antialias: true });
   renderer.setSize(WIDTH, HEIGHT);
   renderer.shadowMapEnabled = true;
-  container = document.getElementById('world');
+  container = document.getElementById('lion');
   container.appendChild(renderer.domElement);
   windowHalfX = WIDTH / 2;
   windowHalfY = HEIGHT / 2;
@@ -66,8 +67,9 @@ function init(){
 }
 
 function onWindowResize() {
-  HEIGHT = window.innerHeight / 2; //TODO: modifier la taille ici
-  WIDTH = window.innerWidth / 2; //TODO: modifier la taille ici
+  $('#lion').css('left', document.getElementById('headerLogo').getBoundingClientRect().left-document.getElementById('headerLogo').getBoundingClientRect().width/2);
+  HEIGHT = 400; //TODO: modifier la taille ici
+  WIDTH = document.getElementById('headerLogo').getBoundingClientRect().width* 2; //TODO: modifier la taille ici
   windowHalfX = WIDTH / 2;
   windowHalfY = HEIGHT / 2;
   renderer.setSize(WIDTH, HEIGHT);
@@ -76,7 +78,7 @@ function onWindowResize() {
 }
 
 function handleMouseMove(event) {
-  mousePos = {x:event.clientX, y:event.clientY};
+  mousePos = {x:event.clientX - (document.getElementById('headerLogo').getBoundingClientRect().left-document.getElementById('headerLogo').getBoundingClientRect().width/2), y:event.clientY};
 }
 
 function handleMouseDown(event) {
@@ -124,12 +126,13 @@ function createLights() {
   scene.add(shadowLight);
 }
 
-function createFloor(){ 
-  floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(1000,500), new THREE.MeshBasicMaterial({color: 0x606060}));
+function createFloor(){
+  /*var wrapper_width = document.getElementById('headerLogo').getBoundingClientRect().width;
+  floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(wrapper_width*2,500), new THREE.MeshBasicMaterial({color: 0xad3525}));
   floor.rotation.x = -Math.PI/2;
   floor.position.y = -100;
   floor.receiveShadow = true;
-  scene.add(floor);
+  scene.add(floor);*/
 }
 
 function createLion(){
@@ -148,7 +151,7 @@ Fan = function(){
   this.speed = 0;
   this.acc =0;
   this.redMat = new THREE.MeshLambertMaterial ({
-    color: 0xad3525, 
+    color: 0xff3232, 
     shading:THREE.FlatShading
   });
   this.greyMat = new THREE.MeshLambertMaterial ({
@@ -222,7 +225,7 @@ Lion = function(){
     shading:THREE.FlatShading
   });
   this.redMat = new THREE.MeshLambertMaterial ({
-    color: 0xad3525, 
+    color: 0xff3232, 
     shading:THREE.FlatShading
   });
   
@@ -329,14 +332,12 @@ Lion = function(){
       
       var amp;
       var zOffset;
-      var periodOffset = Math.random()*Math.PI*2;     
-      var angleOffsetY, angleOffsetX;
-      var angleAmpY, angleAmpX;
+      var periodOffset = Math.random()*Math.PI*2;
       var xInit, yInit;
       
       
       if ((j==0 && k==0) || (j==0 && k==3) || (j==3 && k==0) || (j==3 && k==3)){
-        amp = -10-Math.floor(Math.random()*5);
+        amp = -15-Math.floor(Math.random()*5);
         zOffset = -5;
       }else if (j==0 || k ==0 || j==3 || k==3){
         amp = -5-Math.floor(Math.random()*5);

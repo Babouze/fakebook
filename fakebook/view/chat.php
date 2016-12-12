@@ -37,6 +37,8 @@
 	}
 
 	function closeWindow() {
+
+		// $("#live-chat h4").css("background","#1a8a34");
 		$("#live-chat").css("display","block");
 		$("#chatBubble").hide();
 	}
@@ -48,14 +50,9 @@
 </script>
 
 <script>
-	$( document ).ready(function() {
-		/* On hide le chat, on descend en bas du chat */
-		// refreshChat("true");
-		// $('.chat').hide();
-		// $('.chat-message-counter').show();
-		// $('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-	});
 	
+	var isFirstRefresh = true;
+
 	/* Timer pour le rafraichissement du chat toutes les 2 secondes */	
 	setInterval('refreshChat("false")', 2000);	
 		
@@ -92,10 +89,11 @@
 						idLastChat = valLastId;
 					}
 				}
-
-				if(scrollBottom == 'true') {
-					$('#chatHistory').scrollTop($("#chatHistory")[0].scrollHeight);	
-				}
+				
+				if(scrollBottom == "true" || isFirstRefresh == true) {
+					isFirstRefresh = false;
+					$('.window_frame').scrollTop(99999999);	
+				}				
 			}
 		})
 	}

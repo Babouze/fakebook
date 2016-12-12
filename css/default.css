@@ -44,22 +44,11 @@
   padding-top:5px;
 }
 
-.card {
-    position: relative;
-    display: block;
-    margin-bottom: .75rem;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: .25rem;
-    border: 1px solid rgba(0,0,0,.125);
-    margin: 20px;
-}
-
 #login-wrapper
 {
   position: relative;
   width: 100%;
-  padding-top:10%;
+  padding-top:255px;
 }
 
 #profile-card
@@ -274,10 +263,10 @@ p { margin: 0; }
   margin: 0 0 0 80px;
 }
 
-#world {
+#lion {
   position:absolute;
-  width:100%;
-  height:100%;
+  /*width:100%;*/
+  /*height:100%;*/
   top:0px;
   overflow:hidden;
 }

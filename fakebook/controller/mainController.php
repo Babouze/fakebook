@@ -150,11 +150,18 @@ class mainController
 	 */
 	public static function postNewMessage($request,$context)
 	{
-		$image = $_POST['image'];
-		$image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/" + $image;
-
-		// check realpath("test.jpg");
-		$image = ""; //TOUTDOUX : supprimer après l'upload
+		$resultat = false;
+		$image = "";
+		if(isset($_FILES['image']) AND $_FILES['image']['error'] == 0)
+		{
+			$infosfichier = pathinfo($_FILES['image']['name']);
+			$extension_upload = $infosfichier['extension'];
+			$date = new DateTime();
+			$image = "upload_".date_format($date, "Y-m-d_H-i-s").".".$extension_upload;
+			$resultat = move_uploaded_file($_FILES["image"]["tmp_name"], "images/".$image);
+		}
+		if(!$resultat) $image="";
+		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
 
 		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), $_POST['message'], $image);
 	}
@@ -190,13 +197,20 @@ class mainController
 		return context::SUCCESS;
 	}
 
-	public static function likeMessage($requet,$context) {
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function jaime($request,$context)
+	{
+		echo messageTable::jaime($_POST['idMessage']);
+	}
 
-		$idMessage = $_POST['idMessage'];
-
-		$messageLike = messageTable::addLike($idMessage);
-
-		return context::SUCCESS;
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function partage($request,$context)
+	{
+		messageTable::partage($_POST['idMessage']);
 	}
 
 }

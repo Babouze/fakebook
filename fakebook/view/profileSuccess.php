@@ -9,7 +9,7 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img class="img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
+								echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 							}
 							else
 							{
@@ -72,10 +72,17 @@
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id)
+<<<<<<< HEAD
 												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
 											echo $message->emetteur->nom." ".$message->emetteur->prenom;
 											if($message->emetteur->id != $message->destinataire->id) {
 												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+=======
+												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+											echo $message->parent->nom." ".$message->parent->prenom;
+											if($message->parent->id != $message->destinataire->id) {
+												echo ' <i class="material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+>>>>>>> d932e030e4231a9e59e1e154b9797eb39f2f2bf2
 												echo '</h4>';
 											}
 											else {
@@ -84,8 +91,8 @@
 											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
-										if($message->aime == "" || $message->aime == null) $message->aime = 0;
-											echo $message->aime.' <a href="#" class="card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
+											if($message->aime == "" || $message->aime == null) $message->aime = 0;
+											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
 										echo '</div>';
 									echo '</div>';
 								}
@@ -152,4 +159,42 @@
 			}
 		})
 	});
+</script>
+
+<script type="text/javascript">
+	function jaime(idMessage) {
+		$('#aime' + idMessage).css("animation","");
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=jaime',
+			cache: false,
+			success: function(returnData) {
+				$('#aime' + idMessage).html(returnData);
+				$('#aime' + idMessage).css("animation","animUpdate 3s 1");
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
+	};
+</script>
+
+<script type="text/javascript">
+	function partage(idMessage) {
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=partage',
+			cache: false,
+			success: function(returnData) {
+				// alert(returnData);
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
+	};
 </script>

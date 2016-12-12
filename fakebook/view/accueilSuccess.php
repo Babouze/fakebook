@@ -22,7 +22,7 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-							<form id="postForm" method="POST" enctype="multipart/form-data">
+							<form id="postForm" name="postForm" method="POST" enctype="multipart/form-data">
 								<div class="form-group label-floating is-empty">
 									<label for="post" class="control-label">Postez un message</label>
 									<input type="text" class="form-control" id='message' name="message" />
@@ -34,6 +34,19 @@
 									<input type="text" id="image-text" readonly class="form-control" placeholder="Ajouter une image..">
 								</div>
 								<input class="btn btn-danger" type="submit" name="post" value="Poster">
+								<!-- <div style="position:absolute; width:80px; height:80px;">
+									<svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+									    <rect x="20" y="50" width="4" height="10" fill="#000">
+									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform>
+									    </rect>
+									    <rect x="30" y="50" width="4" height="10" fill="#000">
+									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+									    </rect>
+									    <rect x="40" y="50" width="4" height="10" fill="#000">
+									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+									    </rect>
+									</svg>
+								</div> -->
 							</form>
 						</div>
 					</div>
@@ -53,15 +66,16 @@
 									echo '<div class="card">';
 										if(!empty($message->post->image))
 										{
-											echo '<img class="card-img-top" src="..." alt="Image du post">';
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 										}
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id)
-												echo $message->parent->nom." ".$message->parent->prenom."<br/>";
-											echo $message->emetteur->nom." ".$message->emetteur->prenom;
-											if($message->emetteur->id != $message->destinataire->id) {
+												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+											echo $message->parent->nom." ".$message->parent->prenom;
+											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+
 												echo '</h4>';
 											}
 											else {
@@ -70,8 +84,10 @@
 											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
-										if($message->aime == "" || $message->aime == null) $message->aime = 0;
-											echo '<div id="like' . $message->id .  '"> $message->aime.' </div> <a onClick="likeMessage(' . $message->id . ')" class="btnLike card-link btn btn-sm btn-danger">J\'aime</a> <a href="#" class="card-link btn btn-sm btn-danger">Partager</a>';
+
+											if($message->aime == "" || $message->aime == null) $message->aime = 0;
+											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
+
 										echo '</div>';
 									echo '</div>';
 								}
@@ -90,19 +106,24 @@
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
-		var message = $('#message').val();
-		var image = $('#image').val();
+		// var message = $('#message').val();
+		// var data = $('#postForm').serialize();
+		var formData = new FormData(document.getElementById("postForm"));
+		// formData.append('message', $('#message').val());
+		// formData.append('image', $('#image').files[0]);
 
 		if(message != "")
 		{
 			$.ajax({
 				type:'POST',
 				async: true,
-				data: { message, image } ,
+				data: formData,
 				url:'Afakebook.php?action=postNewMessage',
 				cache: false,
+				processData: false,  // indique à jQuery de ne pas traiter les données
+				contentType: false,   // indique à jQuery de ne pas configurer le contentType
 				success: function(returnData) {
-					// alert(returnData);
+					alert(returnData);
 					$('#message').val("");
 					$('#image-text').val("");
 				}
@@ -111,23 +132,42 @@
 		else
 			alert("Veuillez remplir le champ message");
 	});
+</script>
 
-	function likeMessage(idMessage) {
-		alert(idMessage);
-
+<script type="text/javascript">
+	function jaime(idMessage) {
+		$('#aime' + idMessage).css("animation","");
 		$.ajax({
 			type:'POST',
 			async: true,
 			data: { idMessage } ,
-			url:'Afakebook.php?action=likeMessage',
+			url:'Afakebook.php?action=jaime',
 			cache: false,
 			success: function(returnData) {
-				alert("Message liké");
-
-				// TODO : update le compteur de like
-
-
+				$('#aime' + idMessage).html(returnData);
+				$('#aime' + idMessage).css("animation","animUpdate 1s 1");
+			},
+			error: function(returnData) {
+				alert("Erreur");
 			}
 		})
-	}
+	};
+</script>
+
+<script type="text/javascript">
+	function partage(idMessage) {
+		$.ajax({
+			type:'POST',
+			async: true,
+			data: { idMessage } ,
+			url:'Afakebook.php?action=partage',
+			cache: false,
+			success: function(returnData) {
+				// alert(returnData);
+			},
+			error: function(returnData) {
+				alert("Erreur");
+			}
+		})
+	};
 </script>
