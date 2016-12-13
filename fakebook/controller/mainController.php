@@ -232,47 +232,54 @@ class mainController
 		else
 			$context->listOfMessages = messageTable::getMessages();
 
-		//TODO: Mettre un booléen qui dit qu'on veut juste savoir si il y a de nouveaux posts et envoyer un booléen en réponse à true s'il y a de nouveaux messages. Si le booléen envoyé en ajax est à true (sur le onclick), alors envoyer le code entier
-
 		if($context->listOfMessages)
 		{
+			$content = "";
 			foreach($context->listOfMessages as $message)
 			{
 				if(!isset($idMessage) && $message->id != "100") $idMessage = $message->id;
-				echo '<div class="card">';
+				$content .= '<div class="card">';
 					if(!empty($message->post->image))
 					{
-						echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+						$content .= '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 					}
-					echo '<div class="card-block">';
-						echo '<h4 class="card-title">';
+					$content .= '<div class="card-block">';
+						$content .= '<h4 class="card-title">';
 						if($message->emetteur->id != $message->parent->id)
-							echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
-						echo $message->parent->nom." ".$message->parent->prenom;
-						if($message->parent->id != $message->destinataire->id) {
-							echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+							$content .= $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+						$content .= $message->parent->nom." ".$message->parent->prenom;
+						if($message->destinataire != null)
+						{
+							if($message->parent->id != $message->destinataire->id) {
+								$content .= ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 
-							echo '</h4>';
-						}
-						else {
-							echo '</h4>';
+								$content .= '</h4>';
+							}
+							else {
+								$content .= '</h4>';
+							}
 						}
 
-						echo '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
-					echo '</div>';
-					echo '<div class="card-block pull-right">';
+						$content .= '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+					$content .= '</div>';
+					$content .= '<div class="card-block pull-right">';
 
 						if($message->aime == "" || $message->aime == null) $message->aime = 0;
-						echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
+						$content .= '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
 
-					echo '</div>';
-				echo '</div>';
+					$content .= '</div>';
+				$content .= '</div>';
 			}
 		}
 		else
 		{
-			echo '<div class="card">Aucun message !</div>';
+			$content .= '<div class="card">Aucun message !</div>';
 		}
-		echo "<input class='hidden' id='lastIdMessage' value='".$idMessage."'></input>";
+		$content .= "<input class='hidden' id='lastIdMessage' value='".$idMessage."'></input>";
+
+		if($_POST['getMessages'] == true)
+			echo $content;
+		else
+			echo $idMessage;
 	}
 }

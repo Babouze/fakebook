@@ -182,28 +182,32 @@
 
 <!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
-	setInterval('refreshMessages()', 2000);
+	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
 	var id = $('#destinataire').val();
 
-	function refreshMessages() {
+	function refreshMessages(getMessages) {
 		$.ajax({
 			type:'POST',
 			async: true,
-			data: id,
+			data: { id, getMessages },
 			url:'Afakebook.php?action=refreshMessages',
 			cache: false,
 			success: function(returnData) {
-				if($('#lastIdMessage').val() > lastId  && lastId != 0) {
+				if(getMessages == true)
+				{
 					lastId = $('#lastIdMessage').val();
-					toastr["error"]("Nouveaux posts");
+
+					$('#listOfMessages').html(returnData);
 				}
-				else {
-					lastId = $('#lastIdMessage').val();
-					toastr["error"](lastId);
+				else if(returnData != lastId && lastId != 0)
+				{
+					lastId = returnData;
+					toastr["info"]("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
 				}
-				$('#listOfMessages').html(returnData);
+				else
+					lastId = returnData;
 			}
 		})
 	}
