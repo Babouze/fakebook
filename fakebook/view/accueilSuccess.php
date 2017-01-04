@@ -185,7 +185,7 @@
 	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
-	var id = $('#destinataire').val();
+	var id = $('#destinataire').val(); // $_GET['id']
 
 	function refreshMessages(getMessages) {
 		$.ajax({
@@ -196,15 +196,13 @@
 			cache: false,
 			success: function(returnData) {
 				if(getMessages == true)
-				{
-					lastId = $('#lastIdMessage').val();
-
 					$('#listOfMessages').html(returnData);
-				}
 				else if(returnData != lastId && lastId != 0)
 				{
 					lastId = returnData;
-					toastr["info"]("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
+					toastr.options.timeOut=-1;
+					toastr.options.extendedTimeOut=-1;
+					toastr.info("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
 				}
 				else
 					lastId = returnData;

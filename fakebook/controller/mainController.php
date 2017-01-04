@@ -164,7 +164,6 @@ class mainController
 		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
 
 		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), nl2br($_POST['message']), $image);
-		//TODO: append du new message à faire
 	}
 
 	/*
@@ -187,7 +186,6 @@ class mainController
 
 		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), nl2br($_POST['message']), $image, $_POST['destinataire']);
 		var_dump($newMessage);
-		//TODO: append du new message à faire
 	}
 
 	/*
@@ -280,6 +278,7 @@ class mainController
 		if($_POST['getMessages'] == true)
 			echo $content;
 		else
-			echo $idMessage;
+			$idMessage;
+		//TODO: trouver un moyen pour flush les retours d'ajax parce que, quand on like, le message apparaît alors qu'il ne devrait pas. ça intervient quand il y a plusieurs messages affichés. ça bug sur mon mur aussi (il affiche tous les messages)
 	}
 }

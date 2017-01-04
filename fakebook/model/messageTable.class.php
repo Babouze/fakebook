@@ -33,10 +33,10 @@ class messageTable
 			}
 		}
 
-		if(!empty($listOfMessage))
+		/* if(!empty($listOfMessage))
 		{
 			$context->message = "Aucun message pour cet utilisateur";
-		}
+		} */
 
 		return $listOfMessage;
 	}
