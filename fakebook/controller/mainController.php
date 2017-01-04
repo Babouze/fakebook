@@ -233,32 +233,40 @@ class mainController
 		if($context->listOfMessages)
 		{
 			$content = "";
+			$idMessage = 0;
 			foreach($context->listOfMessages as $message)
 			{
-				if(!isset($idMessage) && $message->id != "100") $idMessage = $message->id;
+				if($idMessage == 0) $idMessage = $message->id;
 				$content .= '<div class="card">';
 					if(!empty($message->post->image))
 					{
 						$content .= '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 					}
 					$content .= '<div class="card-block">';
-						$content .= '<h4 class="card-title">';
-						if($message->emetteur->id != $message->parent->id)
-							$content .= $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
-						$content .= $message->parent->nom." ".$message->parent->prenom;
-						if($message->destinataire != null)
+						if($message->parent != null && $message->post != null && $message->emetteur != null)
 						{
-							if($message->parent->id != $message->destinataire->id) {
-								$content .= ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+							$content .= '<h4 class="card-title">';
+							if($message->emetteur->id != $message->parent->id)
+								$content .= $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+							$content .= $message->parent->nom." ".$message->parent->prenom;
+							if($message->destinataire != null)
+							{
+								if($message->parent->id != $message->destinataire->id) {
+									$content .= ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
 
-								$content .= '</h4>';
+									$content .= '</h4>';
+								}
+								else {
+									$content .= '</h4>';
+								}
 							}
-							else {
-								$content .= '</h4>';
-							}
+
+							$content .= '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES);
+							if($message->post->date != null)
+								$content .= '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 						}
-
-						$content .= '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+						else
+							$content .= '<h4>Format du message incorrect</h4>';
 					$content .= '</div>';
 					$content .= '<div class="card-block pull-right">';
 
@@ -275,10 +283,11 @@ class mainController
 		}
 		$content .= "<input class='hidden' id='lastIdMessage' value='".$idMessage."'></input>";
 
-		if($_POST['getMessages'] == true)
+		if($_POST['getMessages'] == 'true')
 			echo $content;
 		else
-			$idMessage;
+			echo $idMessage;
+
 		//TODO: trouver un moyen pour flush les retours d'ajax parce que, quand on like, le message apparaît alors qu'il ne devrait pas. ça intervient quand il y a plusieurs messages affichés. ça bug sur mon mur aussi (il affiche tous les messages)
 	}
 }
