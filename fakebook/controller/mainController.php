@@ -184,7 +184,7 @@ class mainController
 		if(!$resultat) $image="";
 		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
 
-		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), nl2br($_POST['message']), $image, $_POST['destinataire']);
+		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), $_POST['message'], $image, $_POST['destinataire']);
 		var_dump($newMessage);
 	}
 
@@ -243,7 +243,7 @@ class mainController
 						$content .= '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 					}
 					$content .= '<div class="card-block">';
-						if($message->parent != null && $message->post != null && $message->emetteur != null)
+						if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
 						{
 							$content .= '<h4 class="card-title">';
 							if($message->emetteur->id != $message->parent->id)
@@ -287,7 +287,28 @@ class mainController
 			echo $content;
 		else
 			echo $idMessage;
+	}
 
-		//TODO: trouver un moyen pour flush les retours d'ajax parce que, quand on like, le message apparaît alors qu'il ne devrait pas. ça intervient quand il y a plusieurs messages affichés. ça bug sur mon mur aussi (il affiche tous les messages)
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function updateAvatar($request, $context)
+	{
+		$resultat = false;
+		$avatar = "";
+		if(isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
+		{
+			$infosfichier = pathinfo($_FILES['avatar']['name']);
+			$extension_upload = $infosfichier['extension'];
+			$date = new DateTime();
+			$avatar = "avatar_".date_format($date, "Y-m-d_H-i-s").".".$extension_upload;
+			$resultat = move_uploaded_file($_FILES["avatar"]["tmp_name"], "images/".$avatar);
+		}
+		if(!$resultat) $avatar="";
+		else $avatar = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$avatar;
+
+		utilisateurTable::updateAvatar(context::getSessionAttribute('id'), $avatar);
+		context::setSessionAttribute('avatar', $avatar);
+		echo $avatar;
 	}
 }

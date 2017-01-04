@@ -34,19 +34,6 @@
 									<input type="text" id="image-text" readonly class="form-control" placeholder="Ajouter une image..">
 								</div>
 								<input class="btn btn-danger" type="submit" name="post" value="Poster">
-								<!-- <div style="position:absolute; width:80px; height:80px;">
-									<svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-									    <rect x="20" y="50" width="4" height="10" fill="#000">
-									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform>
-									    </rect>
-									    <rect x="30" y="50" width="4" height="10" fill="#000">
-									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite"></animateTransform>
-									    </rect>
-									    <rect x="40" y="50" width="4" height="10" fill="#000">
-									      <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite"></animateTransform>
-									    </rect>
-									</svg>
-								</div> -->
 							</form>
 						</div>
 					</div>
@@ -106,107 +93,7 @@
 
 <!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
-	$('#postForm').submit(function(e) {
-		e.preventDefault()
-		
-		var formData = new FormData(document.getElementById("postForm"));
-		
-		var message = $("#message").val();
-
-		if(message != "")
-		{
-			$.ajax({
-				type:'POST',
-				async: true,
-				data: formData,
-				url:'Afakebook.php?action=postNewMessage',
-				cache: false,
-				processData: false,  // indique à jQuery de ne pas traiter les données
-				contentType: false,   // indique à jQuery de ne pas configurer le contentType
-				success: function(returnData) {
-					toastr["success"]("Message envoyé");	
-					$('#message').val("");
-					$('#image-text').val("");
-				},
-				error: function(returnData) {
-					toastr["error"]("Erreur lors de l'envoi du message");
-				}
-			})
-		}
-		else {
-			toastr["warning"]("Veuillez remplir le champ message");
-		}
-	});
-</script>
-
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
-	function jaime(idMessage) {
-		$('#aime' + idMessage).css("animation","");
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { idMessage } ,
-			url:'Afakebook.php?action=jaime',
-			cache: false,
-			success: function(returnData) {
-				$('#aime' + idMessage).html(returnData);
-				$('#aime' + idMessage).css("animation","animUpdate 1s 1");
-				toastr["success"]("Like ajouté !");
-			},
-			error: function(returnData) {
-				toastr["error"]("Erreur lors du like");
-			}
-		})
-	};
-</script>
-
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
-	function partage(idMessage) {
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { idMessage } ,
-			url:'Afakebook.php?action=partage',
-			cache: false,
-			success: function(returnData) {
-				toastr["success"]("Message partagé !");
-			},
-			error: function(returnData) {
-				toastr["error"]("Erreur lors du partage");
-			}
-		})
-	};
-</script>
-
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
 	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
-	var id = $('#destinataire').val(); // $_GET['id']
-
-	function refreshMessages(getMessages) {
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { id, getMessages },
-			url:'Afakebook.php?action=refreshMessages',
-			cache: false,
-			success: function(returnData) {
-				if(getMessages == true)
-					$('#listOfMessages').html(returnData);
-				else if(returnData != lastId && lastId != 0)
-				{
-					lastId = returnData;
-					toastr.options.timeOut=-1;
-					toastr.options.extendedTimeOut=-1;
-					toastr.info("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
-				}
-				else
-					lastId = returnData;
-			}
-		})
-	}
 </script>

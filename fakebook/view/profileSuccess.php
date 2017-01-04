@@ -9,11 +9,15 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar">';
+								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised btn-tooltip" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar"';
+								if($_GET['id'] == context::getSessionAttribute('id'))
+									echo ' data-toggle="modal" data-target="#myModal" title="Cliquez pour modifier">';
+								else
+									echo '>';
 							}
 							else
 							{
-								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar">';
+								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar" data-toggle="modal" data-target="#myModal">';
 							} ?>
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
@@ -44,6 +48,7 @@
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Modifier votre statut</label>
 										<input id="statut" type="text" class="form-control" name="post" />
+										<input type="hidden" id="destinataire" name="destinataire" value="<?php echo $_GET['id']; ?>" />
 										<span class="material-input"></span>
 									</div>
 									<input class="btn btn-danger" type="submit" name="post" value="Valider">
@@ -101,109 +106,29 @@
 		</div>
 </div>
 
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
-	$('#postForm').submit(function(e) {
-		e.preventDefault()
-		
-		var formData = new FormData(document.getElementById("postForm"));
-
-		var message = $("#message").val();
-
-		if(message != "")
-		{
-			$.ajax({
-				type:'POST',
-				async: true,
-				data: formData,
-				url:'Afakebook.php?action=postNewMessageOnFriend',
-				cache: false,
-				processData: false,  // indique à jQuery de ne pas traiter les données
-				contentType: false,   // indique à jQuery de ne pas configurer le contentType
-				success: function(returnData) {
-					toastr["success"]("Message posté");	
-					$('#message').val("");
-					$('#image-text').val("");
-				},
-				error: function(returnData) {
-					toastr["error"]("Erreur lors de l'envoi du message");	
-				}
-			})
-		}
-		else {
-			toastr["warning"]("Veuillez remplir le champ message");	
-		}
-	});
-</script>
-
-<!-- Auteur : GARAYT Thomas -->
-<script type="text/javascript">
-	$('#updateStatut').submit(function(e) {
-		e.preventDefault()
-		
-		var statut = $('#statut').val();
-
-		$('#myStatut').css("animation","");
-		
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { statut } ,
-			url:'Afakebook.php?action=updateStatut',
-			cache: false,
-			success: function(returnData) {
-				$('#myStatut').html(statut);
-				$('#myStatut').css("animation","animUpdate 1s 1");
-				$('#statut').val("");
-				toastr["success"]("Statut mis à jour");	
-			},
-			error: function(returnData) {
-				toastr["error"]("Erreur lors de la mise à jour du statut");	
-			}
-		})
-	});
-</script>
-
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
-	function jaime(idMessage) {
-		$('#aime' + idMessage).css("animation","");
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { idMessage } ,
-			url:'Afakebook.php?action=jaime',
-			cache: false,
-			success: function(returnData) {
-				$('#aime' + idMessage).html(returnData);
-				$('#aime' + idMessage).css("animation","animUpdate 3s 1");
-				toastr["success"]("Like ajouté !");
-			},
-			error: function(returnData) {
-				toastr["error"]("Erreur lors du like");
-			}
-		})
-	};
-</script>
-
-<!-- Auteur : DAUDEL Adrien -->
-<script type="text/javascript">
-	function partage(idMessage) {
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { idMessage } ,
-			url:'Afakebook.php?action=partage',
-			cache: false,
-			success: function(returnData) {
-				toastr["success"]("Message partagé !");
-			},
-			error: function(returnData) {
-				toastr["error"]("Erreur lors du partage");
-			}
-		})
-	};
-</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="updateAvatar" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+				<h4 class="modal-title">Changer l'avatar</h4>
+			</div>
+			<div class="modal-body">
+				<form id="modalForm" name="modalForm" method="POST" enctype="multipart/form-data">
+					<div class="form-group label-floating is-fileinput">
+						<input type="file" id='avatar' name="avatar" accept="image/*" />
+						<input type="text" id="avatar-text" readonly class="form-control" placeholder="Choisir une image..">
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-danger btn-simple" value="changer">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
@@ -212,24 +137,34 @@
 	var lastId = 0;
 	var id = $('#destinataire').val(); // $_GET['id']
 
-	function refreshMessages(getMessages) {
-		$.ajax({
-			type:'POST',
-			async: true,
-			data: { id, getMessages },
-			url:'Afakebook.php?action=refreshMessages',
-			cache: false,
-			success: function(returnData) {
-				if(getMessages == true)
-					$('#listOfMessages').html(returnData);
-				else if(returnData != lastId && lastId != 0)
-				{
-					lastId = returnData;
-					toastr["info"]("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
+	$('#modalForm').submit(function(e) {
+		e.preventDefault()
+		
+		var formData = new FormData(document.getElementById("modalForm"));
+
+		if($('#avatar').val() != "")
+		{
+			$.ajax({
+				type:'POST',
+				async: true,
+				data: formData,
+				url:'Afakebook.php?action=updateAvatar',
+				cache: false,
+				processData: false,  // indique à jQuery de ne pas traiter les données
+				contentType: false,   // indique à jQuery de ne pas configurer le contentType
+				success: function(returnData) {
+					toastr["success"]("Avatar changé");
+					$('#avatar-text').val("");
+					$('#imgProfile').attr('src',returnData);
+					$('#myModal').modal('hide');
+				},
+				error: function(returnData) {
+					toastr["error"]("Erreur lors du changement de l'image");
 				}
-				else
-					lastId = returnData;
-			}
-		})
-	}
+			})
+		}
+		else {
+			toastr["warning"]("Veuillez choisir une image");
+		}
+	});
 </script>

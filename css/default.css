@@ -15,6 +15,9 @@
     }
 }
 
+.imgProfile {
+  animation: none;
+}
 .imgProfile:hover {
   cursor:pointer;
 }

@@ -75,6 +75,25 @@ class utilisateurTable
 
 		return $user; 
 	}
+
+	/*
+	* Auteur : DAUDEL Adrien
+	*/
+	public static function updateAvatar($idUser,$path) {
+
+		$em = dbconnection::getInstance()->getEntityManager() ;
+
+		$userRepository = $em->getRepository('utilisateur');
+		$user = $userRepository->findOneById($idUser);	
+		
+		if(!empty($user)) {
+			$user->avatar = $path;
+			$em->persist($user);
+			$em->flush();
+		}
+
+		return $user; 
+	}
 }
 
 ?>
