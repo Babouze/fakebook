@@ -7,6 +7,9 @@
 	</header>
 </div>
 
+<!--
+tabindex="1" 
+	-->
 <div class="hidden" id="chatClose"></div>
 
 <!-- Auteur : GARAYT Thomas -->

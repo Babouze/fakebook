@@ -52,20 +52,24 @@
 								foreach($context->listOfMessages as $message)
 								{
 									echo '<div class="card">';
-										if(!empty($message->post->image))
-										{
-											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
-										}
 										echo '<div class="card-block">';
 										if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
 										{
 											echo '<h4 class="card-title">';
-											if($message->emetteur->id != $message->parent->id)
-												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
-											echo $message->parent->nom." ".$message->parent->prenom;
+											if($message->emetteur->id != $message->parent->id) { ?>
+												<span class="linkprofile" onclick="goToProfile(<?php echo $message->emetteur->id ?>)" >
+												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><br/>";
+											}
+											?>
+												<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
+											<?php	
+												echo $message->parent->nom." ".$message->parent->prenom . "</span>";
 											if($message->parent->id != $message->destinataire->id) {
-												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
-
+												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ';
+											?>
+												<span class="linkprofile" onclick="goToProfile(<?php echo $message->destinataire->id ?>)" >
+											<?php
+												echo $message->destinataire->nom . " " . $message->destinataire->prenom . "</span>";
 												echo '</h4>';
 											}
 											else {
@@ -83,6 +87,11 @@
 											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
 
 										echo '</div>';
+										
+										if(!empty($message->post->image))
+										{
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+										}
 									echo '</div>';
 								}
 							}
@@ -170,5 +179,10 @@
 					lastId = returnData;
 			}
 		})
+	}
+
+// Auteur : GARAYT Thomas
+	function goToProfile(idprofile) {
+		window.open("fakebook.php?action=profile&id=" + idprofile, "_blank");
 	}
 </script>

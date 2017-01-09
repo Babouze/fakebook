@@ -108,22 +108,25 @@ class mainController
 		if(!is_null($newChat)) {
 			foreach($newChat as $chat) {
 
-				if($chat->emetteur->avatar != '') {
-					$av = $chat->emetteur->avatar;
-				}
-				else {
-					$av = 'https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar.png';
-				}
 
-				echo '<hr>';
-				echo '<div class="chat-message clearfix">';
-				echo '<img src="' . $av . '" alt="avatar" width="32" height="32">';
-				echo '<div class="chat-message-content clearfix">';
-				echo '<h5 class="titleMessageChat">' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
-				echo '<p>' . htmlspecialchars($chat->post->texte, ENT_NOQUOTES) . '</p>';
-				echo '</div>';
-				echo '</div>';
-				$idChat = $chat->id;
+					if($chat->emetteur->avatar != '') {
+						$av = $chat->emetteur->avatar;
+					}
+					else {
+						$av = 'https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar.png';
+					}
+
+					echo '<hr>';
+					echo '<div class="chat-message clearfix">';
+					echo '<img src="' . $av . '" alt="avatar" width="32" height="32">';
+					echo '<div class="chat-message-content clearfix">';
+					echo '<h5 class="titleMessageChat">' . $chat->emetteur->nom . ' ' . $chat->emetteur->prenom . '<span class="chat-time">' . date_format($chat->post->date, 'Y-m-d H:i:s') . '</span></h5>' ;
+					echo '<p>' . htmlspecialchars($chat->post->texte, ENT_NOQUOTES) . '</p>';
+					echo '</div>';
+					echo '</div>';
+					$idChat = $chat->id;
+
+			
 			}
 			echo "<input class='hidden' id='lastIdChat' value='" . $idChat . "' ></input>";
 		}
