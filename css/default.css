@@ -17,9 +17,15 @@
 
 .imgProfile {
   animation: none;
+  transition:0.3s;
 }
-.imgProfile:hover {
+.imgProfileH:hover {
+  filter:alpha(opacity=50);
+  opacity:0.5;
+  -moz-opacity:0.5;
+  transition:0.3s;
   cursor:pointer;
+  /*background-image: url("images/default-avatar.png");*/
 }
 
 #toast-container {
