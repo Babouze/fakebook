@@ -53,6 +53,8 @@
 								{
 									echo '<div class="card">';
 										echo '<div class="card-block">';
+										if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
+										{
 											echo '<h4 class="card-title">';
 
 											if($message->emetteur->id != $message->parent->id) { ?>
@@ -82,6 +84,9 @@
 											}
 
 											echo '<p class="card-text">' . nl2br(htmlspecialchars($message->post->texte,ENT_NOQUOTES)) . '</p>';
+										}
+										else
+											echo '<h4>Format du message incorrect</h4>';
 										echo '</div>';
 
 										if(!empty($message->post->image))
@@ -105,6 +110,10 @@
 								echo '<div class="card">Aucun message !</div>';
 							}
 						?>
+					</div>
+					<div class="col-lg-offset-5 col-xl-offset-5 col-md-offset-5 col-sm-offset-2 col-xs-offset-2">
+						<input type="hidden" id="limit" value="10">
+						<button class="btn btn-danger" onClick="loadMorePosts();">Charger plus de posts</button>
 					</div>
 				</div>
 			</div>
@@ -149,12 +158,19 @@
 		}
 	});
 
+// Auteur : DAUDEL Adrien & GARAYT Thomas
+	function loadMorePosts() {
+		$('#limit').val(parseInt($('#limit').val()) + 10);
+		refreshMessages(true);
+	}
+
 // Auteur : DAUDEL Adrien
 	function refreshMessages(getMessages) {
+			var limit = $('#limit').val();
 			$.ajax({
 			type:'POST',
 			async: true,
-			data: { getMessages },
+			data: { getMessages, limit },
 			url:'Afakebook.php?action=refreshMessages',
 			cache: false,
 			success: function(returnData) {

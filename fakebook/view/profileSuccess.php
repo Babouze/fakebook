@@ -75,39 +75,46 @@
 								foreach($context->listOfMessages as $message)
 								{
 									echo '<div class="card">';
-										if(!empty($message->post->image))
-										{
-											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
-										}
 										echo '<div class="card-block">';
+										if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
+										{
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id) { ?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->emetteur->id ?>)" >
-												<?php
-												echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><br/>";
+												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><br/>";
 											}
 											?>
-											<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
+												<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
 											<?php	
-											echo $message->parent->nom." ".$message->parent->prenom . "</span>";
-
+												echo $message->parent->nom." ".$message->parent->prenom . "</span>";
 											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ';
-												?>
+											?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->destinataire->id ?>)" >
-												<?php
+											<?php
 												echo $message->destinataire->nom . " " . $message->destinataire->prenom . "</span>";
 												echo '</h4>';
 											}
 											else {
 												echo '</h4>';
 											}
-											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+
+											echo '<p class="card-text">' . nl2br(htmlspecialchars($message->post->texte,ENT_NOQUOTES)) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+										}
+										else
+											echo '<h4>Format du message incorrect</h4>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
+
 											if($message->aime == "" || $message->aime == null) $message->aime = 0;
 											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
+
 										echo '</div>';
+										
+										if(!empty($message->post->image))
+										{
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+										}
 									echo '</div>';
 								}
 							}
@@ -116,6 +123,10 @@
 								echo '<div class="card">Aucun message !</div>';
 							}
 						?>
+					</div>
+					<div class="col-lg-offset-5 col-xl-offset-5 col-md-offset-5 col-sm-offset-2 col-xs-offset-2">
+						<input type="hidden" id="limit" value="10">
+						<button class="btn btn-danger" onClick="loadMorePosts();">Charger plus de posts</button>
 					</div>
 				</div>
 			</div>
@@ -244,12 +255,19 @@
 		}
 	});
 
+// Auteur : DAUDEL Adrien & GARAYT Thomas
+	function loadMorePosts() {
+		$('#limit').val(parseInt($('#limit').val()) + 10);
+		refreshMessages(true);
+	}
+
 // Auteur : DAUDEL Adrien
 	function refreshMessages(getMessages) {
+			var limit = $('#limit').val();
 			$.ajax({
 			type:'POST',
 			async: true,
-			data: { id, getMessages },
+			data: { id, getMessages, limit },
 			url:'Afakebook.php?action=refreshMessages',
 			cache: false,
 			success: function(returnData) {

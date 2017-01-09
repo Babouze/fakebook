@@ -54,7 +54,7 @@ class mainController
 	 */
 	public static function accueil($request	,$context)
 	{
-		$context->listOfMessages = messageTable::getMessages();
+		$context->listOfMessages = messageTable::getMessages(10);
 
 		return context::SUCCESS;
 	}
@@ -89,9 +89,9 @@ class mainController
 	 */
 	public static function profile($request	,$context)
 	{
-		$context->listOfMessages = messageTable::getMessageByUser($_GET['id']);
+		$context->listOfMessages = messageTable::getMessageByUser($_GET['id'], 10);
 
-		$context->profile = utilisateurTable::getUserById($_GET['id']);
+		$context->profile = utilisateurTable::getUserById($_GET['id'], 10);
 
 		return context::SUCCESS;
 	}
@@ -229,9 +229,9 @@ class mainController
 	public static function refreshMessages($request, $context)
 	{
 		if(!empty($_POST['id']))
-			$context->listOfMessages = messageTable::getMessageByUser($_POST['id']);
+			$context->listOfMessages = messageTable::getMessageByUser($_POST['id'], $_POST['limit']);
 		else
-			$context->listOfMessages = messageTable::getMessages();
+			$context->listOfMessages = messageTable::getMessages($_POST['limit']);
 
 		if($context->listOfMessages)
 		{
