@@ -47,7 +47,8 @@
 							</form>
 							</div>
 						<?php } else { ?>
-							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12"><!-- Auteur : GARAYT Thomas -->
+<!-- Auteur : GARAYT Thomas -->
+							<div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
 								<form id="updateStatut" method="post" enctype="multipart/form-data">
 									<div class="form-group label-floating is-empty">
 										<label for="post" class="control-label">Modifier votre statut</label>
@@ -62,8 +63,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="container"><!-- Author : DAUDEL Adrien -->
+<!-- Author : DAUDEL Adrien -->
+			<div class="container">
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
 					</div>
@@ -134,8 +135,9 @@
 	</div>
 </div>
 
-<!-- Auteur : DAUDEL Adrien -->
+
 <script type="text/javascript">
+// Auteur : DAUDEL Adrien
 	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
@@ -172,7 +174,7 @@
 		}
 	});
 
-	// Auteur : GARAYT Thomas
+// Auteur : GARAYT Thomas
 	$('#updateStatut').submit(function(e) {
 		e.preventDefault()
 		
@@ -198,7 +200,7 @@
 		})
 	});
 
-	// Auteur : DAUDEL Adrien
+// Auteur : DAUDEL Adrien
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
@@ -231,7 +233,7 @@
 		}
 	});
 
-	// Auteur : DAUDEL Adrien
+// Auteur : DAUDEL Adrien
 	function refreshMessages(getMessages) {
 			$.ajax({
 			type:'POST',

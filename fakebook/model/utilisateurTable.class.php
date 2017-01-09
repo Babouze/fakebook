@@ -77,7 +77,7 @@ class utilisateurTable
 	}
 
 	/*
-	* Auteur : DAUDEL Adrien
+	* Auteur : GARAYT Thomas
 	*/
 	public static function updateAvatar($idUser,$path) {
 

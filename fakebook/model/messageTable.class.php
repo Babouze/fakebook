@@ -5,6 +5,9 @@
 
 class messageTable
 {
+	/*
+	 * Author : DAUDEL Adrien
+	 */
 	public static function getMessageByUser($idUser)
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;

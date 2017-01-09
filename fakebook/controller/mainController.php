@@ -290,7 +290,7 @@ class mainController
 	}
 
 	/*
-	* Auteur : DAUDEL Adrien
+	* Auteur : GARAYT Thomas
 	*/
 	public static function updateAvatar($request, $context)
 	{

@@ -40,7 +40,8 @@
 				</div>
 			</div>
 
-			<div class="container"><!-- Auteur : DAUDEL Adrien -->
+<!-- Auteur : DAUDEL Adrien -->
+			<div class="container">
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
 					</div>
@@ -91,13 +92,12 @@
 		</div>
 </div>
 
-<!-- Auteur : DAUDEL Adrien -->
 <script type="text/javascript">
+// Auteur : DAUDEL Adrien
 	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
 
-	// Auteur : DAUDEL Adrien
 	$('#postForm').submit(function(e) {
 		e.preventDefault()
 		
@@ -130,7 +130,7 @@
 		}
 	});
 
-	// Auteur : DAUDEL Adrien
+// Auteur : DAUDEL Adrien
 	function refreshMessages(getMessages) {
 			$.ajax({
 			type:'POST',
