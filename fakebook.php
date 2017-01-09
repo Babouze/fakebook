@@ -20,6 +20,9 @@ if(key_exists("action", $_REQUEST))
 if(!context::isConnect()) // Si l'utilisateur n'est pas connecté et qu'il essaie d'accéder à une page dont il n'a pas l'accès
 	$action = "login";
 
+if(context::isConnect() && $action == "login") // Si un utilisateur connecté essaie d'accéder à la page de login
+	$action = "accueil";
+
 $context = context::getInstance();
 $context->init($nameApp);
 

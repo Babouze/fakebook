@@ -12,4 +12,4 @@ Les fonctionnalités demandées en TP ont toutes été implémentées.
 Nous y avons ajouté les fonctionnalités suivantes :
 	- La limite de la liste des posts. Seule une partie des posts sont chargés et on peut en charger plus en cliquant sur le bouton "charger plus de posts" en bas des pages Profil et Accueil.
 	- Liens vers les profils des utilisateurs dans les posts. En cliquant sur le nom de l'emetteur, du parent ou du destinataire d'un post, un onglet sur son profil est ouvert.
-	- Restriction d'accès. Un utilisateur non connecté ne peut pas accéder à une autre page que celle de connection
+	- Restriction d'accès. Un utilisateur non connecté ne peut pas accéder à une autre page que celle de connexion
