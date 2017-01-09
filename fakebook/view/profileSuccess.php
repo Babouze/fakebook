@@ -80,18 +80,23 @@
 											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
 										}
 										echo '<div class="card-block">';
-											echo '<h4 class="card-title">';
-											if($message->emetteur->id != $message->parent->id)
-												echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
-											echo $message->parent->nom." ".$message->parent->prenom;
-											if($message->parent->id != $message->destinataire->id) {
-												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
-												echo '</h4>';
+											if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
+											{
+												echo '<h4 class="card-title">';
+												if($message->emetteur->id != $message->parent->id)
+													echo $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+												echo $message->parent->nom." ".$message->parent->prenom;
+												if($message->parent->id != $message->destinataire->id) {
+													echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+													echo '</h4>';
+												}
+												else {
+													echo '</h4>';
+												}
+												echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
 											}
-											else {
-												echo '</h4>';
-											}
-											echo '<p class="card-text">'.$message->post->texte.'<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+											else
+												echo '<h4>Format du message incorrect</h4>';
 										echo '</div>';
 										echo '<div class="card-block pull-right">';
 											if($message->aime == "" || $message->aime == null) $message->aime = 0;
@@ -105,6 +110,10 @@
 								echo '<div class="card">Aucun message !</div>';
 							}
 						?>
+					</div>
+					<div class="col-lg-offset-5 col-xl-offset-5 col-md-offset-5 col-sm-offset-2 col-xs-offset-2">
+						<input type="hidden" id="limit" value="10">
+						<button class="btn btn-danger" onClick="loadMorePosts();">Charger plus de posts</button>
 					</div>
 				</div>
 			</div>
@@ -233,12 +242,19 @@
 		}
 	});
 
+// Auteur : DAUDEL Adrien & GARAYT Thomas
+	function loadMorePosts() {
+		$('#limit').val(parseInt($('#limit').val()) + 10);
+		refreshMessages(true);
+	}
+
 // Auteur : DAUDEL Adrien
 	function refreshMessages(getMessages) {
+			var limit = $('#limit').val();
 			$.ajax({
 			type:'POST',
 			async: true,
-			data: { id, getMessages },
+			data: { id, getMessages, limit },
 			url:'Afakebook.php?action=refreshMessages',
 			cache: false,
 			success: function(returnData) {

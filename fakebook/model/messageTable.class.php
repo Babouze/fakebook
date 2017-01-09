@@ -8,7 +8,7 @@ class messageTable
 	/*
 	 * Author : DAUDEL Adrien
 	 */
-	public static function getMessageByUser($idUser)
+	public static function getMessageByUser($idUser, $limit)
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;
 
@@ -17,8 +17,8 @@ class messageTable
 		$listOfMessage = array();
 
 		// On récupère la liste des messages dont l'utilisateur est le destinataire mais aussi le parent
-		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser, array('id' => 'desc'));
-		$listOfMessageParent = $messageRepository->findByParent($idUser, array('id' => 'desc'));
+		$listOfMessageDestinataire = $messageRepository->findByDestinataire($idUser, array('id' => 'desc'), $limit);
+		$listOfMessageParent = $messageRepository->findByParent($idUser, array('id' => 'desc'), $limit);
 
 		foreach($listOfMessageDestinataire as $message) {
 			array_push($listOfMessage,$message);
@@ -47,13 +47,13 @@ class messageTable
 	/*
 	 * Author : DAUDEL Adrien
 	 */
-	public static function getMessages()
+	public static function getMessages($limit)
 	{
 		$em = dbconnection::getInstance()->getEntityManager() ;
 
 		$messageRepository = $em->getRepository('message');
 
-		$listOfMessage = $messageRepository->findBy(array(), array('id' => 'desc'));
+		$listOfMessage = $messageRepository->findBy(array(), array('id' => 'desc'), $limit);
 
 		if(!empty($listOfMessage))
 		{
