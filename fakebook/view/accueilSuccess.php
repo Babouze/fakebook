@@ -71,11 +71,12 @@
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
 											<?php	
 												echo $message->parent->nom." ".$message->parent->prenom . "</span>";
+
 											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ';
-											?>
+												?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->destinataire->id ?>)" >
-											<?php
+												<?php
 												echo $message->destinataire->nom . " " . $message->destinataire->prenom . "</span>";
 												echo '</h4>';
 											}
