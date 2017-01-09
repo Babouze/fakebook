@@ -59,23 +59,25 @@
 
 											if($message->emetteur->id != $message->parent->id) { ?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->emetteur->id ?>)" >
-												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span>";
+												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><span class='messagePartage text-muted'> a partagé ce message</span>";
 											}
 
-											echo '<span class="text-muted pull-right">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
+											echo '<span class="messageDate text-muted pull-right">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
 											
 											if($message->emetteur->id != $message->parent->id) {
 												echo "</br>";
 											}
+
 											?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
 											<?php	
 												echo $message->parent->nom." ".$message->parent->prenom . "</span>";
+
 											if($message->parent->id != $message->destinataire->id) {
 												echo ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ';
-											?>
+												?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->destinataire->id ?>)" >
-											<?php
+												<?php
 												echo $message->destinataire->nom . " " . $message->destinataire->prenom . "</span>";
 												echo '</h4>';
 											}

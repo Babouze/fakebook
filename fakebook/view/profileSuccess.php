@@ -81,8 +81,15 @@
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id) { ?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->emetteur->id ?>)" >
-												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><br/>";
+												<?php echo $message->emetteur->nom . " " . $message->emetteur->prenom . "</span><span class='messagePartage text-muted'> a partagé ce message</span>";
 											}
+											
+											echo '<span class="messageDate text-muted pull-right">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
+
+											if($message->emetteur->id != $message->parent->id) {
+												echo "</br>";
+											}
+
 											?>
 												<span class="linkprofile" onclick="goToProfile(<?php echo $message->parent->id ?>)" >
 											<?php	
@@ -99,11 +106,17 @@
 												echo '</h4>';
 											}
 
-											echo '<p class="card-text">' . nl2br(htmlspecialchars($message->post->texte,ENT_NOQUOTES)) . '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+											echo '<p class="card-text">' . nl2br(htmlspecialchars($message->post->texte,ENT_NOQUOTES)) . '</p>';
 										}
 										else
 											echo '<h4>Format du message incorrect</h4>';
 										echo '</div>';
+
+										if(!empty($message->post->image))
+										{
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+										}
+
 										echo '<div class="card-block pull-right">';
 
 											if($message->aime == "" || $message->aime == null) $message->aime = 0;
@@ -111,10 +124,7 @@
 
 										echo '</div>';
 										
-										if(!empty($message->post->image))
-										{
-											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
-										}
+
 									echo '</div>';
 								}
 							}

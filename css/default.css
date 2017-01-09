@@ -15,6 +15,15 @@
     }
 }
 
+.messagePartage {
+  font-weight:initial;
+}
+
+.messageDate {
+  font-weight:initial;
+}
+
+
 .linkprofile:hover {
   cursor:pointer;
   color:red;

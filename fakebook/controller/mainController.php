@@ -255,21 +255,37 @@ class mainController
 			{
 				if($idMessage == 0) $idMessage = $message->id;
 				$content .= '<div class="card">';
-					if(!empty($message->post->image))
-					{
-						$content .= '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
-					}
+
 					$content .= '<div class="card-block">';
 						if($message->parent != null && $message->post != null && $message->emetteur != null) // On n'affiche pas les messages qui ne sont pas dans le bon format.
 						{
+
 							$content .= '<h4 class="card-title">';
-							if($message->emetteur->id != $message->parent->id)
-								$content .= $message->emetteur->nom." ".$message->emetteur->prenom."<br/>";
+
+							if($message->emetteur->id != $message->parent->id) {
+								$content .= '<span class="linkprofile" onclick="goToProfile(' . $message->emetteur->id . ')" >';
+								$content .= $message->emetteur->nom . " " . $message->emetteur->prenom;
+								$content .= '</span><span class="messagePartage text-muted" > a partagé ce message</span>';
+							}
+								
+							if($message->post->date != null) {
+								$content .= '<span class="messageDate pull-right text-muted">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
+							}
+								
+							if($message->emetteur->id != $message->parent->id) {
+								$content .= "<br/>";
+							}
+								
+							$content .= '<span class="linkprofile" onclick="goToProfile(' . $message->parent->id . ')" >';
 							$content .= $message->parent->nom." ".$message->parent->prenom;
-							if($message->destinataire != null)
-							{
+							$content .= '</span>';
+
+							if($message->destinataire != null) {
 								if($message->parent->id != $message->destinataire->id) {
-									$content .= ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ' . $message->destinataire->nom . " " . $message->destinataire->prenom ;
+									$content .= ' <i class="arrowMessage material-icons">keyboard_arrow_right</i> ';
+									$content .= '<span class="linkprofile" onclick="goToProfile(' . $message->destinataire->id . ')" >';
+									$content .= $message->destinataire->nom . " " . $message->destinataire->prenom ;
+									$content .= '</span>';
 
 									$content .= '</h4>';
 								}
@@ -279,11 +295,16 @@ class mainController
 							}
 
 							$content .= '<p class="card-text">' . htmlspecialchars($message->post->texte,ENT_NOQUOTES);
-							if($message->post->date != null)
-								$content .= '<p class="text-muted">'.date_format($message->post->date, "Y-m-d H:i:s").'</p></p>';
+
 						}
-						else
+						else {
 							$content .= '<h4>Format du message incorrect</h4>';
+						}				
+
+						if(!empty($message->post->image)) {
+							$content .= '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+						}
+
 					$content .= '</div>';
 					$content .= '<div class="card-block pull-right">';
 
