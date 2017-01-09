@@ -13,11 +13,15 @@
 								if($_GET['id'] == context::getSessionAttribute('id'))
 									echo ' data-toggle="modal" data-target="#myModal" title="Cliquez pour modifier" class="imgProfile img-rounded img-responsive img-raised imgProfileH">';
 								else
-									echo 'class="imgProfile img-rounded img-responsive img-raised">';
+									echo 'class="imgProfile img-rounded img-responsive img-raised" title="Avatar de l\'utilisateur">';
 							}
 							else
 							{
-								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Votre avatar" data-toggle="modal" data-target="#myModal">';
+								echo '<img id="imgProfile" style="max-height : 150px; max-width : 200px;" src="https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar" alt="Avatar"';
+								if($_GET['id'] == context::getSessionAttribute('id'))
+									echo ' data-toggle="modal" data-target="#myModal" title="Cliquez pour modifier" class="imgProfile imgProfileH img-rounded img-responsive img-raised imgProfileH">';
+								else
+									echo 'class="imgProfile img-rounded img-responsive img-raised" title="Avatar de l\'utilisateur">';
 							} ?>
 							<div class="caption">
 								<h3><?php echo $context->profile->nom." ".$context->profile->prenom; ?></h3>
