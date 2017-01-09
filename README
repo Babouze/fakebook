@@ -1,0 +1,15 @@
+TP réalisé par DAUDEL Adrien et GARAYT Thomas
+
+Tâches réalisées :
+	Adrien :
+		- Gestion du mur (personnel ou amis) et de la liste d'amis
+	Thomas :
+		- Gestion du chat et de la partie exclusive à l'utilisateur connecté du profil personnel
+
+URL de test : https://pedago02a.univ-avignon.fr/~uapv1400724/fakebook.php
+
+Les fonctionnalités demandées en TP ont toutes été implémentées.
+Nous y avons ajouté les fonctionnalités suivantes :
+	- La limite de la liste des posts. Seule une partie des posts sont chargés et on peut en charger plus en cliquant sur le bouton "charger plus de posts" en bas des pages Profil et Accueil.
+	- Liens vers les profils des utilisateurs dans les posts. En cliquant sur le nom de l'emetteur, du parent ou du destinataire d'un post, un onglet sur son profil est ouvert.
+	- Restriction d'accès. Un utilisateur non connecté ne peut pas accéder à une autre page que celle de connection

@@ -182,8 +182,8 @@
 					toastr.options.timeOut=-1;
 					toastr.options.extendedTimeOut=-1;
 					toastr.info("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
-					toastr.options.timeOut=6;
-					toastr.options.extendedTimeOut=6;
+					toastr.options.timeOut=6000;
+					toastr.options.extendedTimeOut=6000;
 				}
 				else
 					lastId = returnData;
