@@ -106,9 +106,10 @@ class mainController
 		$context->listOfChat = $newChat;
 
 		if(!is_null($newChat)) {
-			foreach($newChat as $chat) {
-
-
+			foreach($newChat as $chat)
+			{
+				if($chat->emetteur != null && $chat->post != null)
+				{
 					if($chat->emetteur->avatar != '') {
 						$av = $chat->emetteur->avatar;
 					}
@@ -125,8 +126,21 @@ class mainController
 					echo '</div>';
 					echo '</div>';
 					$idChat = $chat->id;
+				}
+				else
+				{
+					$av = 'https://pedago02a.univ-avignon.fr/~uapv1400724/images/default-avatar.png';
 
-			
+					echo '<hr>';
+					echo '<div class="chat-message clearfix">';
+					echo '<img src="' . $av . '" alt="avatar" width="32" height="32">';
+					echo '<div class="chat-message-content clearfix">';
+					echo '<h5 class="titleMessageChat">Format du chat incorrect</h5>' ;
+					echo '<p></p>';
+					echo '</div>';
+					echo '</div>';
+					$idChat = $chat->id;
+				}
 			}
 			echo "<input class='hidden' id='lastIdChat' value='" . $idChat . "' ></input>";
 		}
