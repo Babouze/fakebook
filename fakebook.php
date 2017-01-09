@@ -11,11 +11,14 @@ require_once $nameApp.'/controller/mainController.php';
 session_start();
 
 $action = "login";
-if(context::isConnect())
+if(context::isConnect()) // Si l'action est vide et que l'utilisateur est connecté
 	$action = "accueil";
 
 if(key_exists("action", $_REQUEST))
 	$action =  $_REQUEST['action'];
+
+if(!context::isConnect()) // Si l'utilisateur n'est pas connecté et qu'il essaie d'accéder à une page dont il n'a pas l'accès
+	$action = "login";
 
 $context = context::getInstance();
 $context->init($nameApp);

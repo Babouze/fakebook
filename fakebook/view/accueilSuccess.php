@@ -96,4 +96,61 @@
 	setInterval('refreshMessages(false)', 2000);
 
 	var lastId = 0;
+
+	// Auteur : DAUDEL Adrien
+	$('#postForm').submit(function(e) {
+		e.preventDefault()
+		
+		var formData = new FormData(document.getElementById("postForm"));
+
+		var message = $("#message").val();
+
+		if(message != "")
+		{
+			$.ajax({
+				type:'POST',
+				async: true,
+				data: formData,
+				url:'Afakebook.php?action=postNewMessageOnFriend',
+				cache: false,
+				processData: false,  // indique à jQuery de ne pas traiter les données
+				contentType: false,   // indique à jQuery de ne pas configurer le contentType
+				success: function(returnData) {
+					toastr["success"]("Message posté");	
+					$('#message').val("");
+					$('#image-text').val("");
+				},
+				error: function(returnData) {
+					toastr["error"]("Erreur lors de l'envoi du message");	
+				}
+			})
+		}
+		else {
+			toastr["warning"]("Veuillez remplir le champ message");	
+		}
+	});
+
+	// Auteur : DAUDEL Adrien
+	function refreshMessages(getMessages) {
+			$.ajax({
+			type:'POST',
+			async: true,
+			data: { getMessages },
+			url:'Afakebook.php?action=refreshMessages',
+			cache: false,
+			success: function(returnData) {
+				if(getMessages == true)
+					$('#listOfMessages').html(returnData);
+				else if(returnData != lastId && lastId != 0)
+				{
+					lastId = returnData;
+					toastr.options.timeOut=-1;
+					toastr.options.extendedTimeOut=-1;
+					toastr.info("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
+				}
+				else
+					lastId = returnData;
+			}
+		})
+	}
 </script>
