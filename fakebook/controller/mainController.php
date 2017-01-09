@@ -265,11 +265,11 @@ class mainController
 							if($message->emetteur->id != $message->parent->id) {
 								$content .= '<span class="linkprofile" onclick="goToProfile(' . $message->emetteur->id . ')" >';
 								$content .= $message->emetteur->nom . " " . $message->emetteur->prenom;
-								$content .= '</span>';
+								$content .= '</span><span class="messagePartage text-muted" > a partagé ce message</span>';
 							}
 								
 							if($message->post->date != null) {
-								$content .= '<span class="pull-right text-muted">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
+								$content .= '<span class="messageDate pull-right text-muted">' . date_format($message->post->date, "Y-m-d H:i:s") . '</span>';
 							}
 								
 							if($message->emetteur->id != $message->parent->id) {
