@@ -161,7 +161,7 @@ class mainController
 			$resultat = move_uploaded_file($_FILES["image"]["tmp_name"], "images/".$image);
 		}
 		if(!$resultat) $image="";
-		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
+		else $image = "https://pedago02a.univ-avignon.fr/~uapv1602799/images/".$image;
 
 		$newMessage = messageTable::setNewMessage(context::getSessionAttribute('id'), nl2br($_POST['message']), $image);
 	}
@@ -182,7 +182,7 @@ class mainController
 			$resultat = move_uploaded_file($_FILES["image"]["tmp_name"], "images/".$image);
 		}
 		if(!$resultat) $image="";
-		else $image = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$image;
+		else $image = "https://pedago02a.univ-avignon.fr/~uapv1602799/images/".$image;
 
 		$newMessage = messageTable::setNewMessageOnFriend(context::getSessionAttribute('id'), $_POST['message'], $image, $_POST['destinataire']);
 		var_dump($newMessage);
@@ -305,7 +305,7 @@ class mainController
 			$resultat = move_uploaded_file($_FILES["avatar"]["tmp_name"], "images/".$avatar);
 		}
 		if(!$resultat) $avatar="";
-		else $avatar = "https://pedago02a.univ-avignon.fr/~uapv1400724/images/".$avatar;
+		else $avatar = "https://pedago02a.univ-avignon.fr/~uapv1602799/images/".$avatar;
 
 		utilisateurTable::updateAvatar(context::getSessionAttribute('id'), $avatar);
 		context::setSessionAttribute('avatar', $avatar);
