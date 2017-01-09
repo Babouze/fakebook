@@ -52,10 +52,6 @@
 								foreach($context->listOfMessages as $message)
 								{
 									echo '<div class="card">';
-										if(!empty($message->post->image))
-										{
-											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
-										}
 										echo '<div class="card-block">';
 											echo '<h4 class="card-title">';
 											if($message->emetteur->id != $message->parent->id) { ?>
@@ -86,6 +82,11 @@
 											echo '<span id="aime'.$message->id.'">'.$message->aime.'</span> <a onClick="jaime('.$message->id.')" class="card-link btn btn-sm btn-danger">J\'aime</a> <a onClick="partage('.$message->id.')" class="card-link btn btn-sm btn-danger">Partager</a>';
 
 										echo '</div>';
+										
+										if(!empty($message->post->image))
+										{
+											echo '<img class="img-rounded" style="max-height:300px;" src="'.$message->post->image.'" alt="Image du post">';
+										}
 									echo '</div>';
 								}
 							}
