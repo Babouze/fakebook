@@ -18,6 +18,7 @@
 }
 
 .window_panel .window_header {
+	background: #293239;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -27,7 +28,7 @@
 }
 
 .window_panel .window_header_normal {
-	/*background: url('../img/header_bg.gif') repeat-x;*/  /* change to use jquery-ui theme instead */
+	background: #293239; /* change to use jquery-ui theme instead */
 	height: 20px;
 	line-height: 20px;
 	padding: 2px 5px;
@@ -35,8 +36,7 @@
 	cursor: move;
 }
 
-.window_panel .window_header_minimize {
-	/*background: #CFF4F4;*/ /* change to use jquery-ui theme instead */
+.window_panel .window_header_minimize {background: #293239;
 	cursor: pointer;
 	width: 100%;
 	height: 100%;
@@ -52,7 +52,7 @@
 }
 
 .window_panel .window_header_maximize {
-	/*background: url('../img/header_bg.gif') repeat-x;*/  /* change to use jquery-ui theme instead */
+	background: #293239;
 	height: 20px;
 	line-height: 20px;
 	padding: 2px 5px;
@@ -141,27 +141,20 @@
 }
 
 .window_panel .window_header .minimizeImg {
-	background: url(../img/buttons.gif) no-repeat;
-	background-position: -16px;
-	top: 4px;
+	background: url('../img/minimize.png') no-repeat;
 }
 
 .window_panel .window_header .cascadeImg {
-	background: url(../img/buttons.gif) no-repeat;
-	background-position: -32px;
-	top: 4px;
+	background: url('../img/restore.png') no-repeat;
 }
 
 .window_panel .window_header .maximizeImg {
-	background: url(../img/buttons.gif) no-repeat;
-	background-position: -48px;
-	top: 4px;
+	background: url('../img/maximize.png') no-repeat;
+
 }
 
 .window_panel .window_header .closeImg {
-	background: url(../img/buttons.gif) no-repeat;
-	background-position: -64px;
-	top: 4px;
+	background: url('../img/close.png') no-repeat;
 }
 
 .window_panel .frame_loading {
