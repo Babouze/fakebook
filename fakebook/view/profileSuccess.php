@@ -9,11 +9,11 @@
 						<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12" id="profile-card">
 							<?php if($context->profile->avatar != "")
 							{
-								echo '<img id="imgProfile" class="imgProfile img-rounded img-responsive img-raised btn-tooltip" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar"';
+								echo '<img id="imgProfile" style="max-height : 150px; max-width : 200px;" src="'.$context->profile->avatar.'" alt="Votre avatar"';
 								if($_GET['id'] == context::getSessionAttribute('id'))
-									echo ' data-toggle="modal" data-target="#myModal" title="Cliquez pour modifier">';
+									echo ' data-toggle="modal" data-target="#myModal" title="Cliquez pour modifier" class="imgProfile img-rounded img-responsive img-raised imgProfileH">';
 								else
-									echo '>';
+									echo 'class="imgProfile img-rounded img-responsive img-raised">';
 							}
 							else
 							{
@@ -244,6 +244,8 @@
 					toastr.options.timeOut=-1;
 					toastr.options.extendedTimeOut=-1;
 					toastr.info("<p onclick='refreshMessages(true)'>Nouveaux posts, cliquez pour charger</p>");
+					toastr.options.timeOut=6;
+					toastr.options.extendedTimeOut=6;
 				}
 				else
 					lastId = returnData;
