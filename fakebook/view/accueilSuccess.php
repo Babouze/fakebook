@@ -130,7 +130,7 @@
 				type:'POST',
 				async: true,
 				data: formData,
-				url:'Afakebook.php?action=setNewMessage',
+				url:'Afakebook.php?action=postNewMessage',
 				cache: false,
 				processData: false,  // indique à jQuery de ne pas traiter les données
 				contentType: false,   // indique à jQuery de ne pas configurer le contentType
