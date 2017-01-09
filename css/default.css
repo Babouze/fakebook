@@ -15,6 +15,11 @@
     }
 }
 
+.linkprofile:hover {
+  cursor:pointer;
+  color:red;
+}
+
 .card-text {
   overflow-wrap:break-word;
 }
