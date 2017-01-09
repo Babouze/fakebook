@@ -47,6 +47,7 @@ tabindex="1"
 			$(".window_title_text").html("Chat");
 			$(".window_title_text").css("color","");
 		});
+		$('.window_frame').scrollTop(99999999);
 	}
 
 	function onWindowResize() {
@@ -100,7 +101,7 @@ tabindex="1"
 				
 				if(scrollBottom == "true" || isFirstRefresh == "true") {
 					isFirstRefresh = "false";
-					$('.window_frame').scrollTop(99999999);	
+					$('.window_frame').scrollTop(99999999);
 				}				
 			}
 		})
